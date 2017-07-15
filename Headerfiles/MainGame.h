@@ -12,18 +12,17 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 
-enum class GameState {PLAY, EXIT};  // variable is "PLAY" when game runs
-
 class MainGame{
 public:
-   MainGame();                      // constructor
+   MainGame();                              // constructor
 
-   void GameLoop();
-   void InitSystems();              // initialize basic Systems
+   enum GameState {PLAY, EXIT, PAUSE};
+   static const GameState pGameState = PLAY;
+
+   void GameLoop();                        // decides if Game runs etc.
+   void InitSystems();                     // initialize basic Systems
 
 private:
-
-   GameState _GameState;
 
 
 };

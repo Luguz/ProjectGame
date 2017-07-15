@@ -9,18 +9,18 @@
 #include "Graphics.h"
 
 // constructor
-MainGame::MainGame():
-   _GameState(GameState::PLAY)
-   {
+MainGame::MainGame(){
 
-   };
+   }
 
 // this loop is used by other functions to close the game
 void GameLoop(){
    // functions that checks the Gamestate
-   while (_GameState = GameState::PLAY){
+   if (MainGame::pGameState == MainGame::GameState::PLAY){
       MainGame maingame;
       maingame.InitSystems();
+   }else{
+      SDL_Quit();
    }
 }
 
