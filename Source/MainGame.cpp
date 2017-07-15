@@ -7,6 +7,7 @@
 
 #include "MainGame.h"
 #include "Graphics.h"
+#include <SDL2/SDL.h>
 
 // constructor
 MainGame::MainGame(){
@@ -14,7 +15,7 @@ MainGame::MainGame(){
    }
 
 // this loop is used by other functions to close the game
-void GameLoop(){
+void MainGame::GameLoop(){
    // functions that checks the Gamestate
    if (MainGame::pGameState == MainGame::GameState::PLAY){
       MainGame maingame;
@@ -25,7 +26,7 @@ void GameLoop(){
 }
 
 // initialize every important functions to run basic game
-void InitSystems(){
+void MainGame::InitSystems(){
    // start the window
    Graphics graphics;
    graphics.SDLInt();

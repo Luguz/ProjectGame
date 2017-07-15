@@ -49,7 +49,7 @@ OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 
 # Folder Lists (include folders needed for this project)
 # contains list of used subfolders for includes (headers etc.)
-INCDIRS := $(shell find Headerfiles/ -name '*.h' -exec dirname {} \; | sort | uniq)
+INCDIRS := $(shell find Headerfiles/* -name '*.h' -exec dirname {} \; | sort | uniq)
 # INCLIST is a transformation guide for INCDIRS to use as compiler flags
 INCLIST := $(patsubst include/%,-I include/%,$(INCDIRS))
 # creates the subfolders for the BUILDDIR (example: include/Graphics.h gets build/Graphics.h)
@@ -61,9 +61,9 @@ BUILDLIST := $(patsubst include/%,$(BUILDDIR)/%,$(INCDIRS))
 # tells to compile only
 CFLAGS := -c
 # INC tells compiler where to find include files (self created and system used)
-INC := -I Headerfiles $(INCLIST) -I /usr/local/include
+INC := -I Headerfiles $(INCLIST) -I /usr/local/include -I /usr/include
 #  tells where the shared system libs are
-LIB := -L /usr/local/lib  -framework IOKit -lSDL2main -lSDL2
+LIB := -L/usr/local/lib -lSDL2 -lSDL2main `sdl2-config --libs`
 
 ###############################################################################
 
@@ -72,7 +72,7 @@ ifeq ($(UNAME_S),Linux)
     CFLAGS += -std=gnu++11 -02
 
 else
-  CFLAGS += -std=c++11 -stdlib=libstdc++ -O2
+  CFLAGS += -std=c++11 -stdlib=libstdc++ `sdl-config --cflags --libs`
 endif
 
 ###############################################################################

@@ -9,8 +9,8 @@
 #ifndef  __GameProject__MainGame__
 #define  __GameProject__MainGame__
 
-#include <SDL2/SDL.h>
 #include <stdio.h>
+#include <SDL2/SDL.h>
 
 class MainGame{
 public:

@@ -6,12 +6,14 @@
 //    Graphics.cpp :: copyrights by Lukas Guz
 
 #include "Graphics.h"
+#include <SDL2/SDL.h>
+#include <stdio.h>
 
 Graphics::Graphics(){
 
 }
 
-void SDLInt(){
+void Graphics::SDLInt(){
    // Test SDL
    SDL_Init(SDL_INIT_EVERYTHING);
 
