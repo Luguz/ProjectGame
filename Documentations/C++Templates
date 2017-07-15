@@ -1,0 +1,48 @@
+
+// headerfile
+
+//
+//    Game Project -> Space Strategy
+//
+//    NAMEHERE.h
+//
+//    NAMEHERE.h :: copyrights by Lukas Guz
+
+
+#ifndef  __GameProject__NAMEHERE__
+#define  __GameProject__NAMEHERE__
+
+#include <SDL2/SDL.h>
+
+
+class CLASSNAME{
+public:
+   //CLASSNAME();                      //constructor
+
+private:
+
+
+};
+
+
+
+
+#endif //end of define(__GameProject__Graphics__)
+
+////////////////////////////////////////////////////////////////////////////////
+
+// cpp-file
+
+//
+//    Game Project -> Space Strategy
+//
+//    NAMEHERE.cpp
+//
+//    NAMEHERE.cpp :: copyrights by Lukas Guz
+
+#include "NAMEHERE.h"
+
+
+void NAMEHERE::xxx(){
+
+}

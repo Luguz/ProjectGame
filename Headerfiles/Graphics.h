@@ -9,16 +9,18 @@
 #ifndef  __GameProject__Graphics__
 #define  __GameProject__Graphics__
 
+#include "MainGame.h"
+
 #include <SDL2/SDL.h>
-#include <iostream>
+#include <stdio.h>
 
 class Graphics{
 public:
-   //Graphics();                      //constructor
+   Graphics();                      // constructor
 
-   void SDLInt();
+   void SDLInt();                   // makes window etc. (SDL)
 private:
-
+   SDL_Window* win;
 
 };
 

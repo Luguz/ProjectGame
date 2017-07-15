@@ -9,14 +9,14 @@
 //
 //    main.cpp :: copyrights by Lukas Guz
 
-#include "Graphics.h"
+#include "MainGame.h"
 
 int main(int, char**) {
 
-   Graphics Graph;
-   Graph.SDLInt();
+   // start the game !!!
+   MainGame maingame;
+   maingame.GameLoop();
 
    return 0;
 
-//commit text
 }
