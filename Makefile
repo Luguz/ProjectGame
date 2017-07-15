@@ -2,7 +2,7 @@
 #  Makefile
 #  GameProject
 #
-#  Created by Hilton Lipschitz on 2015-09-01. Processed by Lukas Guz
+#  Created by Hilton Lipschitz on 2015-09-01. Processed by Lukas Guz.
 #  Copyright (c) 2015 Maritime Capital LP. All rights reserved.
 #
 
@@ -61,9 +61,9 @@ BUILDLIST := $(patsubst include/%,$(BUILDDIR)/%,$(INCDIRS))
 # tells to compile only
 CFLAGS := -c
 # INC tells compiler where to find include files (self created and system used)
-INC := -I Headerfiles $(INCLIST) -I /usr/local/include -I /usr/include
+INC := -I Headerfiles $(INCLIST) -I /usr/local/include
 #  tells where the shared system libs are
-LIB := -L/usr/local/lib -lSDL2 -lSDL2main `sdl2-config --libs`
+LIB := -L/usr/local/lib -lSDL2
 
 ###############################################################################
 
@@ -72,7 +72,7 @@ ifeq ($(UNAME_S),Linux)
     CFLAGS += -std=gnu++11 -02
 
 else
-  CFLAGS += -std=c++11 -stdlib=libstdc++ `sdl-config --cflags --libs`
+  CFLAGS += -std=c++11
 endif
 
 ###############################################################################
@@ -95,7 +95,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 
 # clean the project from all files created by make
 clean:
-	@echo "Cleaning $(TARGET)..."; $(RM) -r $(OBJECTS) $(TARGET)
+	@echo "Cleaning $(TARGET)..."; $(RM) -r $(BUILDDIR) $(OBJECTS) $(TARGET)
 # deleted the $(BUILDDIR) option after -r you maybe change on other projects
 ###############################################################################
 

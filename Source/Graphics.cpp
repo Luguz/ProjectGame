@@ -20,7 +20,7 @@ void Graphics::SDLInt(){
    SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 640, 480,
     SDL_WINDOW_SHOWN);
 
-   printf("Game-window loaded");
+   printf("Game-window loaded\n");
    SDL_UpdateWindowSurface(win);
 	SDL_Delay(2000);
 
