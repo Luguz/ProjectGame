@@ -8,6 +8,7 @@
 #include "MainGame.h"
 #include "Graphics.h"
 #include "GameStructure.h"
+#include "Audio.h"
 
 
 // constructor
@@ -16,7 +17,7 @@ MainGame::MainGame():
 
    }
 
-// basic public start function
+// basic public start function -> used in main.cpp
 void MainGame::RunGame(){
    // initialize the basic game-functions
    _InitSystems();
@@ -25,6 +26,7 @@ void MainGame::RunGame(){
 }
 
 // this loop is used by other functions to close the game
+// let the important functions work as long game runs
 void MainGame::_GameLoop(){
    // functions that checks the Gamestate
    while(_GameState != GameState::EXIT){
@@ -33,17 +35,23 @@ void MainGame::_GameLoop(){
       // draw the game
       _DrawGame();
    }
+   Mix_Quit();
+   SDL_Quit();
 }
 
-// initialize every important functions to run basic game
+// initialize every important function/variable to run game
 void MainGame::_InitSystems(){
    // creates the Window
    Graphics graphics;
-   graphics.BasicSDL();
+   graphics.StartSDL();
 
    // creates world surface
    GameStructure gamestructure;
    gamestructure.StartWorldCreation();
+
+   // starts Audio functions
+   Audio audio;
+   audio.StartAudio();
 
 }
 
@@ -66,7 +74,6 @@ SDL_Event evnt;                 // variable for events ( 1 = pending; 2 = none a
             break;
        }
    }
-
 }
 
 // draws the final game with help of Graphics.cpp
@@ -74,5 +81,4 @@ void MainGame::_DrawGame(){
    // starts all functions for creating the graphics
    Graphics graphics;
    graphics._GraphicsControl();
-
 }

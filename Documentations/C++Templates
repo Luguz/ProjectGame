@@ -15,7 +15,8 @@
 
 class CLASSNAME{
 public:
-   //CLASSNAME();                      //constructor
+   //constructor
+   CLASSNAME();                      
 
 private:
 
@@ -37,6 +38,10 @@ private:
 
 #include "NAMEHERE.h"
 
+//constructor
+NAMEHERE::NAMEHERE(){
+
+}
 
 void NAMEHERE::xxx(){
 

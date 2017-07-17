@@ -63,7 +63,7 @@ CFLAGS := -c
 # INC tells compiler where to find include files (self created and system used)
 INC := -I Headerfiles $(INCLIST) -I /usr/local/include
 #  tells where the shared system libs are
-LIB := -L/usr/local/lib -lSDL2
+LIB := -L/usr/local/lib -lSDL2 -lSDL2_mixer
 
 ###############################################################################
 

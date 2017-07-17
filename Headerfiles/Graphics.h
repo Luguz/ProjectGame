@@ -13,8 +13,6 @@
 
 #include <SDL2/SDL.h>
 #include <stdio.h>
-#include <iostream>
-#include <fstream>
 #include <string>
 
 class Graphics{
@@ -23,9 +21,9 @@ public:
    Graphics();
 
    // starts basic SDL instances
-   void BasicSDL();
+   void StartSDL();
 
-   // manages graphic-functions(SDL)
+   // manages graphic-functions(SDL) and changes
    void _GraphicsControl();
 
 private:
@@ -35,10 +33,6 @@ private:
    SDL_Surface       *_surface         ;
    int               _screenWidth      ;
    int               _screenHeight     ;
-
-   // function and variables to read files to load Resources
-   void _LoadGraphicResources(std::string fileType, std::string nameObject);
-   std::string _filePath;
 
 };
 

@@ -35,5 +35,5 @@ void GameStructure::_BasicWorldCreation(){
    _worldVector.push_back("GROUND");
    i++;
    }
-   printf("Vector: %s\n",_worldVector[_worldsize].c_str() );
+   printf(" World-Vector created last object in vector: %s\n",_worldVector[_worldsize].c_str() );
 }

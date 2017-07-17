@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 enum class GameState{PLAY, EXIT, PAUSE};  // class that contains diff. gamestates
 

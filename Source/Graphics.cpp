@@ -17,9 +17,9 @@ Graphics::Graphics():
 
 }
 
-void Graphics::BasicSDL(){
+void Graphics::StartSDL(){
    // initialize everything
-   SDL_Init(SDL_INIT_EVERYTHING);
+   SDL_Init(SDL_INIT_VIDEO);
    if (SDL_Init(SDL_INIT_VIDEO != 0)){
       printf("error initializing SDL: %s\n", SDL_GetError());
    }
@@ -52,40 +52,5 @@ void Graphics::_GraphicsControl(){
 
    // update window
    SDL_UpdateWindowSurface(_window);
-
-}
-
-
-void Graphics::_LoadGraphicResources(std::string fileType, std::string nameObject){
-
-   // prepares the Type to be a file path
-   fileType = fileType.append(".txt");
-   fileType = fileType.insert(0,"Resources/");
-
-   // opends the needed file by FileType(prepared)
-   std::ifstream file;        // variable file that can use the needed functions
-   file.open(fileType);       // open the needed file
-
-   // prints error code if file was not opened correctly
-   if (!file){
-      printf("Error in Reading: %s\n", fileType.c_str());
-   }else{
-
-      // reading file and put this in variable lines
-      std::string lines;
-      unsigned int curRow = 0;
-
-      while(std::getline(file, lines)){
-         //search for the requested Object
-         if (lines.find(nameObject) != std::string::npos){
-            std:size_t pos = lines.find('"');
-            _filePath = lines.substr(pos);
-            printf("Error test %s\n", _filePath.c_str());
-         }
-         // next line:
-         curRow++;
-      }
-   }
-   file.close();
 
 }

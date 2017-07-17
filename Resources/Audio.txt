@@ -9,9 +9,9 @@
 #
 ############################## Audio ######################################
 # List of audio files for building-phase
-
+STARTMUSIC    [01]="Resources/Audio/Dark _Atmosphere13_Looped_24bit"
 
 
 ############################## Copyrights #################################
 
-[] made by
+[01] made by Lucas Calvo - mundosound.com Link: https://opengameart.org/content/dark-ambient-loop-13

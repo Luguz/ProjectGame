@@ -7,15 +7,15 @@
 #
 ############################## Textures ##################################
 # List of textures for interface and player selections
-SELECTION    [00]="Resources/Images/selection.png"
+SELECTION    [00]="Resources/Textures/selection.png"
 
 # List of textures for the environment
-GROUND       [00]="Resources/Images/ground.png"
+GROUND       [00]="Resources/Textures/ground.png"
 
 # List of textures for buildings
-FACTORY      [00]="Resources/Images/factory.png"
-LIVQUARTERS  [00]="Resources/Images/livingQuarters.png"
-STREET       [00]="Resources/Images/street.png"
+FACTORY      [00]="Resources/Textures/factory.png"
+LIVQUARTERS  [00]="Resources/Textures/livingQuarters.png"
+STREET       [00]="Resources/Textures/street.png"
 
 
 ############################## Copyrights ################################
