@@ -1,0 +1,23 @@
+############################# Description ################################
+# This files collect all Textures and allows to load them as needed.
+#
+#   1. name of object
+#   2. number-code for copyrights see end of file
+#   3. link to file
+#
+############################## Textures ##################################
+# List of textures for interface and player selections
+SELECTION    [00]="Resources/Images/selection.png"
+
+# List of textures for the environment
+GROUND       [00]="Resources/Images/ground.png"
+
+# List of textures for buildings
+FACTORY      [00]="Resources/Images/factory.png"
+LIVQUARTERS  [00]="Resources/Images/livingQuarters.png"
+STREET       [00]="Resources/Images/street.png"
+
+
+############################## Copyrights ################################
+
+[00] made by Lukas Guz

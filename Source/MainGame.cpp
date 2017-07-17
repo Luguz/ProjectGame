@@ -2,32 +2,77 @@
 //    Game Project -> Space Strategy
 //
 //    MainGame.cpp
+//    copyrights by Lukas Guz
 //
-//    MainGame.cpp :: copyrights by Lukas Guz
 
 #include "MainGame.h"
 #include "Graphics.h"
-#include <SDL2/SDL.h>
+#include "GameStructure.h"
+
 
 // constructor
-MainGame::MainGame(){
+MainGame::MainGame():
+   _GameState(GameState::PLAY){
 
    }
 
+// basic public start function
+void MainGame::RunGame(){
+   // initialize the basic game-functions
+   _InitSystems();
+   // starts game loop
+   _GameLoop();
+}
+
 // this loop is used by other functions to close the game
-void MainGame::GameLoop(){
+void MainGame::_GameLoop(){
    // functions that checks the Gamestate
-   if (MainGame::pGameState == MainGame::GameState::PLAY){
-      MainGame maingame;
-      maingame.InitSystems();
-   }else{
-      SDL_Quit();
+   while(_GameState != GameState::EXIT){
+      // input check
+      InputCheck();
+      // draw the game
+      DrawGame();
    }
 }
 
 // initialize every important functions to run basic game
-void MainGame::InitSystems(){
-   // start the window
+void MainGame::_InitSystems(){
+   // creates the Window
    Graphics graphics;
-   graphics.SDLInt();
+   graphics.BasicSDL();
+
+   // creates world surface
+   GameStructure gamestructure;
+   gamestructure.WorldCreation();
+
+}
+
+// checks the input from player
+void MainGame::_InputCheck(){
+SDL_Event evnt;                 // variable for events ( 1 = pending; 2 = none available)
+
+   // process inputs
+   while (SDL_PollEvent(&evnt)) // while event true (=1)
+   {
+       switch (evnt.type) {
+         // Quit game with close window button
+         case SDL_QUIT:
+            _GameState = GameState::EXIT;
+            break;
+         // take mousemotion
+         case SDL_MOUSEMOTION:
+            break;
+         default:
+            break;
+       }
+   }
+
+}
+
+// draws the final game with help of Graphics.cpp
+void MainGame::_DrawGame(){
+   // starts all functions for creating the graphics
+   Graphics graphics;
+   graphics.GraphicsControl();
+
 }

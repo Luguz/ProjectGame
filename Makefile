@@ -95,8 +95,8 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 
 # clean the project from all files created by make
 clean:
-	@echo "Cleaning $(TARGET)..."; $(RM) -r $(BUILDDIR) $(OBJECTS) $(TARGET)
-# deleted the $(BUILDDIR) option after -r you maybe change on other projects
+	@echo "Cleaning $(TARGET)..."; $(RM) -r $(OBJECTS) $(TARGET)
+# deleted the $(BUILDDIR) option after -r maybe change on other projects
 ###############################################################################
 
 # install the game where it should run

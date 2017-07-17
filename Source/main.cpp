@@ -15,7 +15,7 @@ int main(int, char**) {
 
    // start the game !!!
    MainGame maingame;
-   maingame.GameLoop();
+   maingame.RunGame();
 
    return 0;
 

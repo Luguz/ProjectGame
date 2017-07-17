@@ -1,0 +1,17 @@
+############################# Description ################################
+#  Game Project -> Space Strategy
+#
+#  This files collect all audio files and allows to load them as needed.
+#
+#  1. name of audio file
+#  2. number-code for copyrights see end of file
+#  3. link to file
+#
+############################## Audio ######################################
+# List of audio files for building-phase
+
+
+
+############################## Copyrights #################################
+
+[] made by

@@ -1,29 +1,36 @@
 //
 //    Game Project -> Space Strategy
 //
-//    Graphics.h
+//    MainGame.h
+//    copyrights by Lukas Guz
 //
-//    Graphics.h :: copyrights by Lukas Guz
 
 
 #ifndef  __GameProject__MainGame__
 #define  __GameProject__MainGame__
 
 #include <stdio.h>
+#include <iostream>
 #include <SDL2/SDL.h>
+
+enum class GameState{PLAY, EXIT, PAUSE};  // class that contains diff. gamestates
 
 class MainGame{
 public:
-   MainGame();                              // constructor
+   MainGame();                            // constructor
 
-   enum GameState {PLAY, EXIT, PAUSE};
-   static const GameState pGameState = PLAY;
-
-   void GameLoop();                        // decides if Game runs etc.
-   void InitSystems();                     // initialize basic Systems
+   void RunGame();                        // starts the game (the loop)
 
 private:
 
+   GameState _GameState;                  // variable to control gamestatus
+
+   void _GameLoop();                       // decides if Game runs etc.
+   void _InitSystems();                    // initialize basic Systems
+
+   void _InputCheck();                     // monitors the input
+
+   void _DrawGame();                       // draws game
 
 };
 

@@ -2,8 +2,8 @@
 //    Game Project -> Space Strategy
 //
 //    Graphics.h
+//    copyrights by Lukas Guz
 //
-//    Graphics.h :: copyrights by Lukas Guz
 
 
 #ifndef  __GameProject__Graphics__
@@ -13,14 +13,32 @@
 
 #include <SDL2/SDL.h>
 #include <stdio.h>
+#include <iostream>
+#include <fstream>
+#include <string>
 
 class Graphics{
 public:
-   Graphics();                      // constructor
+   // constructor
+   Graphics();
 
-   void SDLInt();                   // makes window etc. (SDL)
+   // starts basic SDL instances
+   void BasicSDL();
+
 private:
-   SDL_Window* win;
+   // manages graphic-functions(SDL)
+   void _GraphicsControl();
+
+   // window related variables
+   SDL_Window        *_window          ;
+   SDL_Renderer      *_renderer        ;
+   SDL_Surface       *_surface         ;
+   int               _screenWidth      ;
+   int               _screenHeight     ;
+
+   // function and variables to read files to load Resources
+   void _LoadGraphicResources(std::string fileType, std::string nameObject);
+   std::string filePath;
 
 };
 

@@ -23,3 +23,5 @@ The game obviously starts with the **main.cpp** with the int main(...) function.
 
 #
 ### Plans for the future (To-Do-List)
+- [ ] add "error-code"
+- [ ] if the texture in the loader function don't work set the texture to a placeholder

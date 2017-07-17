@@ -5,14 +5,12 @@
 //    Game Project -> Space Strategy
 //
 //    NAMEHERE.h
+//    copyrights by Lukas Guz
 //
-//    NAMEHERE.h :: copyrights by Lukas Guz
 
 
 #ifndef  __GameProject__NAMEHERE__
 #define  __GameProject__NAMEHERE__
-
-#include <SDL2/SDL.h>
 
 
 class CLASSNAME{
@@ -24,10 +22,7 @@ private:
 
 };
 
-
-
-
-#endif //end of define(__GameProject__Graphics__)
+#endif //end of define(__GameProject__NAMEHERE__)
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -37,8 +32,8 @@ private:
 //    Game Project -> Space Strategy
 //
 //    NAMEHERE.cpp
+//    copyrights by Lukas Guz
 //
-//    NAMEHERE.cpp :: copyrights by Lukas Guz
 
 #include "NAMEHERE.h"
 
