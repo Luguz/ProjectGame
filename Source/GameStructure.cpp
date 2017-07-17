@@ -9,7 +9,7 @@
 
 // constructor
 GameStructure::GameStructure():
-   _worldsize(100000),
+   _worldsize(10000000),
    _worldVector(0){
 
 }
@@ -31,8 +31,9 @@ void GameStructure::_BasicWorldCreation(){
    int i = 0;
 
    // fill the world
-   while(i < _worldsize){
+   while(i < _worldsize+1){
    _worldVector.push_back("GROUND");
    i++;
    }
+   printf("Vector: %s\n",_worldVector[_worldsize].c_str() );
 }
