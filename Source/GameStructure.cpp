@@ -9,8 +9,8 @@
 
 // constructor
 GameStructure::GameStructure():
-   _worldVector(0),
-   _worldsize(100000){
+   _worldsize(100000),
+   _worldVector(0){
 
 }
 
@@ -26,13 +26,13 @@ void GameStructure::_WorldControl(){
 }
 
 // creates the basic starting world
-void _BasicWorldCreation(){
+void GameStructure::_BasicWorldCreation(){
    // running index
    int i = 0;
-   int b = 10000;
+
    // fill the world
-   while(i < b){
-   _worldVector[i] = "GROUND";
+   while(i < _worldsize){
+   _worldVector.push_back("GROUND");
    i++;
    }
 }

@@ -43,6 +43,7 @@ void Graphics::BasicSDL(){
       SDL_DestroyWindow(_window);
       SDL_Quit();
    }
+
 }
 
 
@@ -78,7 +79,8 @@ void Graphics::_LoadGraphicResources(std::string fileType, std::string nameObjec
          //search for the requested Object
          if (lines.find(nameObject) != std::string::npos){
             std:size_t pos = lines.find('"');
-            filePath = lines.substr(pos);
+            _filePath = lines.substr(pos);
+            printf("Error test %s\n", _filePath.c_str());
          }
          // next line:
          curRow++;

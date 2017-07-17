@@ -29,9 +29,9 @@ void MainGame::_GameLoop(){
    // functions that checks the Gamestate
    while(_GameState != GameState::EXIT){
       // input check
-      InputCheck();
+      _InputCheck();
       // draw the game
-      DrawGame();
+      _DrawGame();
    }
 }
 
@@ -43,7 +43,7 @@ void MainGame::_InitSystems(){
 
    // creates world surface
    GameStructure gamestructure;
-   gamestructure.WorldCreation();
+   gamestructure.StartWorldCreation();
 
 }
 
@@ -73,6 +73,6 @@ SDL_Event evnt;                 // variable for events ( 1 = pending; 2 = none a
 void MainGame::_DrawGame(){
    // starts all functions for creating the graphics
    Graphics graphics;
-   graphics.GraphicsControl();
+   graphics._GraphicsControl();
 
 }

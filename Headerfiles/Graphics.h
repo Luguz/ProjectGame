@@ -25,10 +25,10 @@ public:
    // starts basic SDL instances
    void BasicSDL();
 
-private:
    // manages graphic-functions(SDL)
    void _GraphicsControl();
 
+private:
    // window related variables
    SDL_Window        *_window          ;
    SDL_Renderer      *_renderer        ;
@@ -38,7 +38,7 @@ private:
 
    // function and variables to read files to load Resources
    void _LoadGraphicResources(std::string fileType, std::string nameObject);
-   std::string filePath;
+   std::string _filePath;
 
 };
 

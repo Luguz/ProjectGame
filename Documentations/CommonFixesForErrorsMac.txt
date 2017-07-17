@@ -1,0 +1,5 @@
+Common fixes for Errors created by compiling program.
+
+-> Segmentation fault 11:
+   1. Vector to long -> not a fix!
+   2. write wrong to variable (for example to vector with [i] not push_back)

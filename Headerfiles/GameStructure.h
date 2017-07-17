@@ -10,19 +10,21 @@
 #define  __GameProject__GameStructure__
 
 #include <vector>
+#include <string>
+#include <iostream>
 
 class GameStructure{
 public:
-   GameStructure();                      //constructor
+   GameStructure();                          //constructor
 
    void StartWorldCreation();
 
 private:
-   // function and variable for basic surface
-   int _worldsize                ;
-   std::vector<char> _worldVector;      // vector with surface types
-   void _BasicWorldCreation()    ;
 
+   // function and variable for basic surface
+   int _worldsize;
+   std::vector<std::string> _worldVector;// vector with surface types
+   void _BasicWorldCreation();
 
    // manages the world surface
    void _WorldControl();
