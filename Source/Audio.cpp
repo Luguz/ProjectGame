@@ -7,11 +7,12 @@
 
 #include "Audio.h"
 #include "GameStructure.h"
-#include "RessourceLinker.h"
+#include "ResourceLinker.h"
 
 //constructor
 Audio::Audio():
-   audioFile("STARTMUSIC"){
+   audioFile("STARTMUSIC"),
+   _musicPlayed(NULL){
 
 }
 
@@ -23,27 +24,37 @@ void Audio::StartAudio(){
       printf("error initializing Audio: %s\n", SDL_GetError());
    }
    // initialize SDL_mixer for audio
-   if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ){
+   if( Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 2048) == -1){
       printf( "SDL_mixer could not initialize! SDL_mixer Error:%s\n"
          , Mix_GetError() );
    }
+
    _PlayMusic("STARTMUSIC");
 }
 
+
+// function to play the music in background
 void Audio::_PlayMusic(std::string audioFile){
 
-   // changes music that plays
-   //RessourceLinker ressourceLinker;
-   //ressourceLinker.LoadResources("Audio",audioFile);
+   // search for music in Resources
+   ResourceLinker resourceLinker;
+   resourceLinker.LoadResources("Audio",audioFile);
+   printf("file path used %s\n",resourceLinker._filePath.c_str());
 
    // Load the Music specific musicfile
-   musicPlayed = Mix_LoadMUS("Resources/Audio/Dark _Atmosphere13_Looped_24bit.wav");
-   if( musicPlayed == NULL ){
-     printf( "Failed to load Audio(Music): %s\n", Mix_GetError() );
+   _musicPlayed = Mix_LoadMUS("../Resources/Audio/Dark_Atmosphere13_Looped_24bit.wav");
+   if(!_musicPlayed){
+     printf( "Failed to load Audio(Music): %s\n", Mix_GetError());
   }
-  // play the music
-  Mix_PlayMusic( musicPlayed, 1);
-  // free the music (is a pointer)
-  Mix_FreeMusic( musicPlayed );
-    musicPlayed = NULL;
+
+  // play the music forever (,-1) eq. zero on success
+  if(Mix_PlayMusic(_musicPlayed, -1) == -1) {
+        printf("Mix_PlayMusic: %s\n", Mix_GetError());
+  }
+
+  // stops music playback
+  Mix_HaltMusic();
+  Mix_FreeMusic(_musicPlayed);   // free the pointer of music
+  _musicPlayed = NULL;           // to check if it is freed
+
 }

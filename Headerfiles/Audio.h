@@ -11,6 +11,7 @@
 
 #include <string>
 #include <stdio.h>
+#include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
@@ -28,7 +29,9 @@ public:
 
 private:
 
-   Mix_Music *musicPlayed = NULL;
+   // create pointer for music file
+   Mix_Music *_musicPlayed;
+
    // function to manage Music
    void _PlayMusic(std::string audioFile);            // needs var for music type
 };

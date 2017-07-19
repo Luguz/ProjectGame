@@ -72,7 +72,7 @@ ifeq ($(UNAME_S),Linux)
     CFLAGS += -std=gnu++11 -02
 
 else
-  CFLAGS += -std=c++11
+  CFLAGS += -g -std=c++11
 endif
 
 ###############################################################################

@@ -52,7 +52,6 @@ void MainGame::_InitSystems(){
    // starts Audio functions
    Audio audio;
    audio.StartAudio();
-
 }
 
 // checks the input from player

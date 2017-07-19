@@ -9,7 +9,7 @@
 
 // constructor
 GameStructure::GameStructure():
-   _worldsize(10000000),
+   _worldsize(1000),
    _worldVector(0){
 
 }
