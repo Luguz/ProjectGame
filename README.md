@@ -1,5 +1,5 @@
 # ProjectGame
-##### created mostly by Lukas Guz
+##### created mostly by Lukas Guz, Felix Korthals
 #
 ### Create/Compile the Game with the console (Makefile)
 At first many thanks to **Hilton Lipschitz** for providing a great Tutorial for creating Makefiles ([Link](http://hiltmon.com/blog/2015/09/28/the-simple-c-plus-plus-makefile-executable-edition/))

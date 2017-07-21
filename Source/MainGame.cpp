@@ -2,7 +2,7 @@
 //    Game Project -> Space Strategy
 //
 //    MainGame.cpp
-//    copyrights by Lukas Guz
+//    copyrights by Lukas Guz, Felix Korthals
 //
 
 #include "MainGame.h"

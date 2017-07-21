@@ -2,7 +2,7 @@
 #  Makefile
 #  GameProject
 #
-#  Created by Hilton Lipschitz on 2015-09-01. Processed by Lukas Guz.
+#  Created by Hilton Lipschitz on 2015-09-01. Processed by Lukas Guz, Felix Korthals.
 #  Copyright (c) 2015 Maritime Capital LP. All rights reserved.
 #
 
@@ -72,7 +72,7 @@ ifeq ($(UNAME_S),Linux)
     CFLAGS += -std=gnu++11 -02
 
 else
-  CFLAGS += -g -std=c++11
+  CFLAGS += -g -O1 -std=c++11
 endif
 
 ###############################################################################

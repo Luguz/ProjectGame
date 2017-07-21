@@ -2,7 +2,7 @@
 //    Game Project -> Space Strategy
 //
 //    Audio.cpp
-//    copyrights by Lukas Guz
+//    copyrights by Lukas Guz, Felix Korthals
 //
 
 #include "Audio.h"
@@ -30,6 +30,9 @@ void Audio::StartAudio(){
    }
 
    _PlayMusic("STARTMUSIC");
+   // stops music playback
+   //Mix_FreeMusic(_musicPlayed);   // free the pointer of music
+   //_musicPlayed = NULL;           // to check if it is freed
 }
 
 
@@ -39,10 +42,10 @@ void Audio::_PlayMusic(std::string audioFile){
    // search for music in Resources
    ResourceLinker resourceLinker;
    resourceLinker.LoadResources("Audio",audioFile);
-   printf("file path used %s\n",resourceLinker._filePath.c_str());
+   //printf("file path used %s\n",resourceLinker._filePath.c_str());
 
    // Load the Music specific musicfile
-   _musicPlayed = Mix_LoadMUS("../Resources/Audio/Dark_Atmosphere13_Looped_24bit.wav");
+   _musicPlayed = Mix_LoadMUS("Resources/Audio/game_music_0.ogg");
    if(!_musicPlayed){
      printf( "Failed to load Audio(Music): %s\n", Mix_GetError());
   }
@@ -51,10 +54,4 @@ void Audio::_PlayMusic(std::string audioFile){
   if(Mix_PlayMusic(_musicPlayed, -1) == -1) {
         printf("Mix_PlayMusic: %s\n", Mix_GetError());
   }
-
-  // stops music playback
-  Mix_HaltMusic();
-  Mix_FreeMusic(_musicPlayed);   // free the pointer of music
-  _musicPlayed = NULL;           // to check if it is freed
-
 }

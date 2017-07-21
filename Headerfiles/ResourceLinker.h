@@ -2,7 +2,7 @@
 //    Game Project -> Space Strategy
 //
 //    ResourceLinker.h
-//    copyrights by Lukas Guz
+//    copyrights by Lukas Guz, Felix Korthals
 //
 
 

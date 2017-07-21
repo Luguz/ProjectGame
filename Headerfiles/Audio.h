@@ -2,7 +2,7 @@
 //    Game Project -> Space Strategy
 //
 //    Audio.h
-//    copyrights by Lukas Guz
+//    copyrights by Lukas Guz, Felix Korthals
 //
 
 
@@ -30,7 +30,7 @@ public:
 private:
 
    // create pointer for music file
-   Mix_Music *_musicPlayed;
+   Mix_Music *_musicPlayed = NULL;
 
    // function to manage Music
    void _PlayMusic(std::string audioFile);            // needs var for music type

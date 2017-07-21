@@ -7,7 +7,7 @@
 //    there is a clean, install and distclean option (for more Info. -> Readme)
 //    makefile was original made by Hilton Lipschitz (for more Info- -> Readme)
 //
-//    main.cpp :: copyrights by Lukas Guz
+//    main.cpp :: copyrights by Lukas Guz, Felix Korthals
 
 #include "MainGame.h"
 
