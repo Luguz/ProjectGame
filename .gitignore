@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 
+
 # Compiled Object files
 *.slo
 *.lo
@@ -21,3 +22,7 @@
 *.la
 *.a
 *.lib
+
+# OS generated files
+.DS_Store
+.DS_Store?
