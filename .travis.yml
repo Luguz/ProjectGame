@@ -1,2 +1,25 @@
 language: cpp
+
+os:
+  #- linux
+  - osx
+
+compiler:
+  - gcc
+  - clang
+
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update      ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install sdl2; fi
+
+
+#if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+
+#   brew install sdl2
+
+#else
+    # Install some custom requirements on Linux
+#fi
+
+
 script: make
