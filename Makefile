@@ -2,9 +2,9 @@
 #  Makefile
 #  GameProject
 #
-#  Created by Hilton Lipschitz on 2015-09-01. Processed by Lukas Guz, Felix Korthals.
+#  Created by Hilton Lipschitz on 2015-09-01.
 #  Copyright (c) 2015 Maritime Capital LP. All rights reserved.
-#
+#	Processed by Lukas Guz, Felix Korthals.
 
 # Determine the platform
 UNAME_S := $(shell uname -s)
