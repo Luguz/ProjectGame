@@ -1,0 +1,22 @@
+dist: trusty
+sudo: require
+
+language: cpp
+compiler:
+  - clang
+  - gcc
+  
+  addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-6
+      - g++-6
+      - cmake
+      
+script:
+    - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
+    - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
+    
+    - gcc -v && g++ -v && cmake --version
