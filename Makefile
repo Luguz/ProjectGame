@@ -67,9 +67,9 @@ LIB := -L/usr/local/lib -lSDL2 -lSDL2_mixer
 
 ###############################################################################
 
-# Platform Specific Compiler Flags
+# Platform Specific Compiler Flags (deleted -02 from linux)
 ifeq ($(UNAME_S),Linux)
-    CFLAGS += -std=gnu++11 -02
+    CFLAGS += -std=gnu++11
 
 else
   CFLAGS += -g -O1 -std=c++11
