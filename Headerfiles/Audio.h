@@ -33,7 +33,7 @@ private:
    Mix_Music *_musicPlayed = NULL;
 
    // function to manage Music
-   void _PlayMusic(std::string audioFile);            // needs var for music type
+   void _PlayMusic(std::string audioFile);     // needs var for music type
 };
 
 #endif //end of define(__GameProject__Audio__)
