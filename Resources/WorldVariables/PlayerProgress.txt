@@ -1,0 +1,26 @@
+############################# Description ######################################
+#  Game Project -> Space Strategy
+#
+#  This files saves the Progress of the Game.
+#
+# Explanation Player Possessions:
+# > NAME of Variable - {Number of , ... }
+#
+# Explanation Technology
+# type of Technology Number of Technology - {researched? (0 False, 1 True)}
+#
+################################################################################
+
+[Player Possessions]
+> Balance     -  {10000}
+> Metal       -  {100,100,,,,}                # Steel,Gold
+> Food        -  {100,100,,,,}                # Insta-Food,
+> Population  -  {100,100,10,,,}              # Worker, Scientist, Low Soldier
+
+
+[Technology]
+> BasicSpaceTechnology          1  -  {0}
+> BasicSpaceStationExtensions   2  -  {0}
+
+
+[End of PlayerProgress.txt]

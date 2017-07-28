@@ -21,3 +21,9 @@ STREET       [00]="Resources/Textures/street.png"
 ############################## Copyrights ################################
 
 [00] made by Lukas Guz
+
+
+
+
+
+[End of Textures.txt]

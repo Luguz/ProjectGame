@@ -1,0 +1,31 @@
+############################# Description ######################################
+#  Game Project -> Space Strategy
+#
+#  This files saves the Progress of the Game.
+#
+# Explanation Buildings:
+# > NAME - Object Number {Cost,x-Axis,y-Axis,
+#          max number of (0 = unlimited),technology state}
+#
+# Explanation Technology:
+# > NAME - Technology Number {Cost,Duration of Development (Minutes),
+#          Technology requirements (0 none)}
+#
+################################################################################
+
+[Buildings]
+> Startcenter             1  -  {0,26,26,1,0}
+> ConnectionPipes         2  -  {10,2,2,0,0}
+> Livingquarters          3  -  {150,6,6,0,0}
+> FactoryFood             4  -  {300,12,12,0,0}
+> FactorySteel            5  -  {450,12,12,0,0}
+> FactoryPreciousMetals   6  -  {2500,16,16,0,0}
+> Barracks                7  -  {200,20,20,1,0}
+
+
+[Technology]
+> BasicSpaceTechnology          1  -  {2500,10,0}
+> BasicSpaceStationExtensions   2  -  {2500,10,0}
+
+
+[End of GameObjects.txt]
