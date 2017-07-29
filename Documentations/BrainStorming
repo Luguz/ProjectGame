@@ -1,0 +1,87 @@
+
+copyrights by Lukas Guz, Felix Korthals
+
+##########################################
+Kennzeichnungen:
+
+_  == private
+variablen klein
+funktionen groß
+
+i    == integer
+s   == string
+b   == bool
+c   == char
+cc == const* char
+#define ALLESGROß 0
+
+##########################################
+
+
+Funktionalitäten:
+
+    Objekte als Klassen oder so allgemein Gebäude -> MilitärGebäude -> ...
+    structs?
+    Werte belegen/ frei halten
+    Speichern
+
+#########################################
+
+Welt Randomizer -> Bebaubarkeit
+-> mehrere Welten
+
+BackStory (Schwierigskeitrad / Spielstil)
+ - Militär
+ - Forschung
+
+Station bauen
+-> stufenweise
+-> Geld, Rohstoffe, Strom, Einfluss, Bekanntheit
+-> Einwohnerzahl
+
+Verbindungen zwischen Gebäuden:
+
+    - Warenverkehr
+
+    - Personenverkehr
+
+(Bauradius)
+
+unterschiedliche Zivilisationen mit unterschiedlichen Rohstoffvorlieben
+-> Preisverfall Inflation (mit Bedarf abgleichen)
+-> Reputationssystem (Unterstützungen)
+
+Gebäudetypen:
+
+    - Raumhafen
+
+    - Handelszentrum
+
+    - Wohnbereiche (Einwohnerzahl ist Vorrausetzung für bestimmte Größe)
+
+    - Zentrum
+
+    - Forschungszentrum (Technologie abhängig vom Level)
+
+
+Technologien:
+    -Gebäudetypen
+    - Militärtechnologien
+
+
+Events:
+
+    Händler kommt (wenn keine Handelsrouten bzw. zusätzlich zu Handelsr.)
+
+    X fliegt vorbei. Möchtest du X ausrauben?
+
+    Angriffe durch Dritte
+
+    Naturkatastrophen (Meteoritenhagel, Erdbeben)
+
+
+
+
+Game Assets:
+
+    https://opengameart.org/content/space-kit-10
