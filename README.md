@@ -26,3 +26,6 @@ The game obviously starts with the **main.cpp** with the int main(...) function.
 - [ ] add "error-code"
 - [ ] if the texture in the loader function don't work set the texture to a placeholder
 - [ ] put copyrights info outside the Linker files into the folder with the actual files
+
+### Future Game Features?
+- [ ] Pipes connect Buildings (need function to check this)
