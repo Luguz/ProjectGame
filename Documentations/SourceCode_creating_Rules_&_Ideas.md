@@ -15,7 +15,7 @@ copyrights by Lukas Guz, Felix Korthals
 
 #### prefixes for variables (not for running variables and "intern" used variables!)
 
-**generic c++ prefixes**
+##### generic c++ prefixes
 - i     == integer
 - ui    == unsigned integer
 - vec   == vector
@@ -37,7 +37,7 @@ copyrights by Lukas Guz, Felix Korthals
 - ptr    == pointer (generic pointer)
 - IPtr etc == add prefix on Ptr for mor spezific information
 
-**game Variables specific prefixes**
+##### game Variables specific prefixes
 - keep variables free for future implementations
 - **List of Categories (important for world vector)**
    * `0-999` == ground types
@@ -46,7 +46,7 @@ copyrights by Lukas Guz, Felix Korthals
 - buildings/Units gets to there number a characteristic (for Ex.: 1X, 21R ...)
 - **List of characteristics:**
 
-### use of c++ functionalities:
+#### use of c++ functionalities:
 
 
 - objects as class with inherit from main classes (buildings -> military buildings)
