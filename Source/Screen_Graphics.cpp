@@ -46,10 +46,28 @@ void Screen_Graphics::StartSDL(){
 
 }
 
-
+// combines and manages all Graphic functions
 void Screen_Graphics::GraphicsControl(){
 
+   // start the creating of World based on World-Vector
+   DrawWorldSurface();
    // update window
    SDL_UpdateWindowSurface(_ptrWindow);
+
+}
+
+//
+void Screen_Graphics::DrawWorldSurface(){
+   /*
+   // running index
+   int i = 0;
+
+   // going through the _worldVector to draw World surface
+   while(i < Player_World_Variables::iWorldsize){
+
+      Player_World_Variables::vecWorldVector[i]
+      i++;
+   }
+   */
 
 }

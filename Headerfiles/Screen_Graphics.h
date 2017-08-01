@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include <string>
 
+#include "Player_World_Variables.h"
+
 class Screen_Graphics{
 public:
    // constructor
@@ -34,6 +36,7 @@ private:
    int               _iScreenWidth      ;
    int               _iScreenHeight     ;
 
+   void DrawWorldSurface();
 };
 
 

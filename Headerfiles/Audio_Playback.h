@@ -29,6 +29,8 @@ public:
    // string that contains the needed audiofile
    std::string strAudioFile;
 
+   // include Error output function by include File_Manager
+   File_Manager file_manager;
 private:
 
    // create pointer for music file

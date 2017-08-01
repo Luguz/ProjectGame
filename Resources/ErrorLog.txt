@@ -1,1 +1,28 @@
-# Example [28-07-2017 10:00:00]  "Error Text"
+|2017|01-08|17:49:22|: Couldn't open 'Resources/Audio/game_music_.ogg'
+|2017|01-08|17:49:22|: music parameter was NULL
+|2017|01-08|18:40:19|: 
+|2017|01-08|18:40:19|: music parameter was NULL
+|2017|01-08|18:40:39|: 
+|2017|01-08|18:40:39|: music parameter was NULL
+|2017|01-08|18:41:19|: Couldn't open 'File_Manager::strFilePath.c_str()'
+|2017|01-08|18:41:19|: music parameter was NULL
+|2017|01-08|18:52:37|: 
+|2017|01-08|18:52:37|: music parameter was NULL
+|2017|01-08|18:54:05|: 
+|2017|01-08|18:54:05|: music parameter was NULL
+|2017|01-08|18:56:45|: 
+|2017|01-08|18:56:45|: music parameter was NULL
+|2017|01-08|19:10:43|: Couldn't open ''
+|2017|01-08|19:10:43|: music parameter was NULL
+|2017|01-08|19:11:11|: Couldn't open ''
+|2017|01-08|19:11:11|: music parameter was NULL
+|2017|01-08|19:11:16|: 
+|2017|01-08|19:11:16|: music parameter was NULL
+|2017|01-08|19:16:59|: 
+|2017|01-08|19:16:59|: music parameter was NULL
+|2017|01-08|19:29:02|: 
+|2017|01-08|19:29:02|: music parameter was NULL
+|2017|01-08|19:52:15|: Couldn't open '..Resources/Audio/game_music_0.ogg'
+|2017|01-08|19:52:15|: music parameter was NULL
+|2017|01-08|19:53:11|: Couldn't open '..Resources/Audio/game_music_0.ogg'
+|2017|01-08|19:53:11|: music parameter was NULL

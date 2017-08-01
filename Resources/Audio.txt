@@ -9,7 +9,7 @@
 #
 ############################## Audio ######################################
 # List of audio files for building-phase
-STARTMUSIC    [01]="../Resources/Audio/Dark_Atmosphere13_Looped_24bit.wav"
+STARTMUSIC    [01]="../Resources/Audio/game_music_0.ogg"
 
 
 ############################## Copyrights #################################

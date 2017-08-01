@@ -9,5 +9,8 @@ Common fixes for Errors created by compiling program.
 -> SDL_Mixer "error for object 0x...: pointer being freed was not allocated"
    1.
 
+-> ...std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) in ...
+   ??? 1. When construct strings in the constructor use stringName("")
+
 -> Undefined symbols for architecture x86_64:
    1. class/function typed different in different places

@@ -12,7 +12,9 @@
 #include <string>
 #include <stdio.h>
 #include <iostream>
-#include <fstream>
+#include <fstream>      // write and read to/from file
+#include <time.h>       // get time
+
 
 class File_Manager{
 public:
@@ -20,8 +22,12 @@ public:
    File_Manager();
 
    // function and variables to read files to load Resources
+   static std::string strFilePath;
    void LinkResources(std::string strFileType, std::string strNameObject);
-   std::string strFilePath;
+
+   // function and variable to create, collect and save Errorcode
+   std::string strErrorCode;
+   void WriteErrorLog(std::string strErrorCode);
 
 };
 

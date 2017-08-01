@@ -9,8 +9,8 @@
 
 //constructor
 File_Manager::File_Manager():
-   strFilePath(""){
-
+   strFilePath(""),
+   strErrorCode(""){
 }
 
 // LoadResources
@@ -44,5 +44,30 @@ void File_Manager::LinkResources(std::string strFileType, std::string strNameObj
       }
    }
    file.close();
+}
 
+// write to the ErrorLog.txt and print error to terminal
+void File_Manager::WriteErrorLog(std::string strErrorCode){
+
+   // get time Error took place
+   time_t errorTime;                    // errorTime object with time_t functions
+   struct tm *locTime;                  // struct containing Day/Time info in components
+   // write time information in useable format
+   errorTime = time(NULL);              // get the current time (in a raw format)
+   locTime = localtime(&errorTime);     // make it to a local time (raw to readable)
+   // put time info in whised format
+   char cTimeOutput[30];                                       // char to safe time info
+   strftime(cTimeOutput, 30, "|%Y|%d-%m|%H:%M:%S|", locTime);  // put time in format (string)
+
+   // print the Error Code to the Terminal as well
+   printf("%s: %s\n",cTimeOutput, strErrorCode.c_str());
+
+   // make a temporary variable error with fstream functions
+   std::fstream error;
+   // open ErrorLog.txt with write options ("app" adds and does not delete previous txt)
+   error.open("Resources/ErrorLog.txt", std::fstream::ate |std::fstream::app);
+   // writing to the ErrorLog.txt (Time ErrorCode)
+   error <<  cTimeOutput << ": " << strErrorCode << std::endl;
+
+   error.close();
 }

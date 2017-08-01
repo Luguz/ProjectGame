@@ -10,7 +10,7 @@
 
 //constructor
 Audio_Playback::Audio_Playback():
-   strAudioFile("STARTMUSIC"),
+   strAudioFile(""),
    _ptrMusicPlayed(NULL){
 
 }
@@ -28,10 +28,8 @@ void Audio_Playback::StartAudio(){
          , Mix_GetError() );
    }
 
+   // Starts Music in Background
    _PlayMusic("STARTMUSIC");
-   // stops music playback
-   //Mix_FreeMusic(_musicPlayed);   // free the pointer of music
-   //_musicPlayed = NULL;           // to check if it is freed
 }
 
 
@@ -39,18 +37,17 @@ void Audio_Playback::StartAudio(){
 void Audio_Playback::_PlayMusic(std::string strAudioFile){
 
    // search for music in Resources
-   File_Manager file_manager;
    file_manager.LinkResources("Audio",strAudioFile);
-   //printf("file path used %s\n",resourceLinker._filePath.c_str());
+   //printf("%s\n",File_Manager::strFilePath.c_str());
 
    // Load the Music specific musicfile
    _ptrMusicPlayed = Mix_LoadMUS("Resources/Audio/game_music_0.ogg");
    if(!_ptrMusicPlayed){
-     printf( "Failed to load Audio(Music): %s\n", Mix_GetError());
-  }
+      //file_manager.WriteErrorLog(Mix_GetError());
+   }
 
   // play the music forever (,-1) eq. zero on success
   if(Mix_PlayMusic(_ptrMusicPlayed, -1) == -1) {
-        printf("Mix_PlayMusic: %s\n", Mix_GetError());
+     //file_manager.WriteErrorLog(Mix_GetError());
   }
 }
