@@ -18,18 +18,19 @@
 #include "Screen_Graphics.h"
 #include "Player_World_Interaction.h"
 #include "Audio_Playback.h"
+#include "Player_World_Variables.h"
 
 enum class clGameState{PLAY, EXIT, PAUSE};  // class that contains diff. gamestates
 
 class Main_Game{
 public:
-   Main_Game();                            // constructor
+   Main_Game();                           // constructor
 
    void RunGame();                        // starts the game (the loop)
 
 private:
 
-   clGameState _clGameState;                  // variable to control gamestatus
+   clGameState _clGameState;              // variable to control gamestatus
 
    void _InputCheck();                    // monitors the input
 

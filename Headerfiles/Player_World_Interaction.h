@@ -14,21 +14,16 @@
 #include <string>
 #include <iostream>
 
+#include "Player_World_Variables.h"
+
 class Player_World_Interaction{
 public:
    Player_World_Interaction();       //constructor
 
-   void StartWorldCreation();
-
 private:
 
-   // function and variable for basic surface
-   int _iWorldsize;
-   std::vector<std::string> _vecWorldVector;// vector with surface types
-   void _BasicWorldCreation();
-
    // manages the world surface
-   void _WorldControl();
+   void _WorldSurfaceControl();
 
 
 

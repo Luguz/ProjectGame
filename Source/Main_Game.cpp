@@ -42,8 +42,8 @@ void Main_Game::_InitSystems(){
    screen_graphics.StartSDL();
 
    // creates world surface
-   Player_World_Interaction player_world_interaction;
-   player_world_interaction.StartWorldCreation();
+   Player_World_Variables player_world_variables;
+   player_world_variables.BasicWorldCreation("EarthMoon",10000);
 
    // starts Audio functions
    Audio_Playback audio_playback;
