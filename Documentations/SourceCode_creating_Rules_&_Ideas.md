@@ -13,8 +13,8 @@ copyrights by Lukas Guz, Felix Korthals
 - _  == private function
 - \# define "ALL BIG" 0
 
-##### prefixes for
-variables (not for running variables and "intern" used variables!)
+###### prefixes for:
+- variables (not for running variables and "intern" used variables!)
 
 **generic c++ prefixes**
 - i     == integer
