@@ -51,7 +51,3 @@ copyrights by Lukas Guz, Felix Korthals
 
 - objects as class with inherit from main classes (buildings -> military buildings)
 - structs?
-
-
-    Werte belegen/ frei halten
-    Texte in Datei Auslagern (mutlilanguage)
