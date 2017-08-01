@@ -9,13 +9,13 @@
 //
 //    main.cpp :: copyrights by Lukas Guz, Felix Korthals
 
-#include "MainGame.h"
+#include "Main_Game.h"
 
 int main(int, char**) {
 
    // start the game !!!
-   MainGame maingame;
-   maingame.RunGame();
+   Main_Game main_game;
+   main_game.RunGame();
 
    return 0;
 

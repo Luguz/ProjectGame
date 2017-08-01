@@ -1,31 +1,32 @@
 //
 //    Game Project -> Space Strategy
 //
-//    ResourceLinker.cpp
+//    FileManager.cpp
 //    copyrights by Lukas Guz, Felix Korthals
 //
 
-#include "ResourceLinker.h"
+#include "File_Manager.h"
 
 //constructor
-ResourceLinker::ResourceLinker(){
+File_Manager::File_Manager():
+   strFilePath(""){
 
 }
 
 // LoadResources
-void ResourceLinker::LoadResources(std::string fileType, std::string nameObject){
+void File_Manager::LinkResources(std::string strFileType, std::string strNameObject){
 
    // prepares the Type to be a file path
-   fileType = fileType.append(".txt");
-   fileType = fileType.insert(0,"Resources/");
+   strFileType = strFileType.append(".txt");
+   strFileType = strFileType.insert(0,"Resources/");
 
    // opends the needed file by FileType(prepared)
    std::ifstream file;        // variable file that can use the needed functions
-   file.open(fileType);       // open the needed file
+   file.open(strFileType);       // open the needed file
 
    // prints error code if file was not opened correctly
    if (!file){
-      printf("Error in Reading: %s\n", fileType.c_str());
+      printf("Error in Reading: %s\n", strFileType.c_str());
    }else{
 
       // reading file and put this in variable lines
@@ -34,9 +35,9 @@ void ResourceLinker::LoadResources(std::string fileType, std::string nameObject)
 
       while(std::getline(file, lines)){
          //search for the requested Object
-         if (lines.find(nameObject) != std::string::npos){
+         if (lines.find(strNameObject) != std::string::npos){
             std:size_t pos = lines.find('"');
-            _filePath = lines.substr(pos);
+            strFilePath = lines.substr(pos);
          }
          // next line:
          curRow++;

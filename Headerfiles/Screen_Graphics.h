@@ -1,7 +1,7 @@
 //
 //    Game Project -> Space Strategy
 //
-//    Graphics.h
+//    Screen_Graphics.h
 //    copyrights by Lukas Guz
 //
 
@@ -9,30 +9,30 @@
 #ifndef  __GameProject__Graphics__
 #define  __GameProject__Graphics__
 
-#include "MainGame.h"
+#include "Main_Game.h"
 
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <string>
 
-class Graphics{
+class Screen_Graphics{
 public:
    // constructor
-   Graphics();
+   Screen_Graphics();
 
    // starts basic SDL instances
    void StartSDL();
 
    // manages graphic-functions(SDL) and changes
-   void _GraphicsControl();
+   void GraphicsControl();
 
 private:
    // window related variables
-   SDL_Window        *_window          ;
-   SDL_Renderer      *_renderer        ;
-   SDL_Surface       *_surface         ;
-   int               _screenWidth      ;
-   int               _screenHeight     ;
+   SDL_Window        *_ptrWindow        ;
+   SDL_Renderer      *_ptrRenderer      ;
+   SDL_Surface       *_ptrSurface       ;
+   int               _iScreenWidth      ;
+   int               _iScreenHeight     ;
 
 };
 

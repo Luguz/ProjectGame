@@ -7,13 +7,30 @@ Kennzeichnungen:
 _  == private
 variablen klein
 funktionen groß
-
-i    == integer
-s   == string
-b   == bool
-c   == char
-cc == const* char
 #define ALLESGROß 0
+
+# Präfixe für Variablen (nicht für Laufvariablen und nur "intern" genutze Variablen!)
+i     == integer
+ui    == unsigned integer
+vec   == vector
+s     == short
+us    == unsigned short
+l     == long
+ul    == unsigned long
+ll    == long long
+ull   == unsigned long long
+f     == float
+d     == double
+ld    == long double
+str   == string
+b     == bool
+c     == char
+cc    == const* char
+uc    == unsigned char
+cl    == classvariable
+pr    == pointer (meist SDL -> nicht ganz klar was für variable)
+-> sollte sonst genauer gekennzeichnert werden z.B.: Ipr (int pointer)
+
 
 ##########################################
 

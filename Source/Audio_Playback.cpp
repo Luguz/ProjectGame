@@ -1,23 +1,22 @@
 //
 //    Game Project -> Space Strategy
 //
-//    Audio.cpp
+//    Audio_Playback.cpp
 //    copyrights by Lukas Guz, Felix Korthals
 //
 
-#include "Audio.h"
-#include "GameStructure.h"
-#include "ResourceLinker.h"
+#include "Audio_Playback.h"
+
 
 //constructor
-Audio::Audio():
-   audioFile("STARTMUSIC"),
-   _musicPlayed(NULL){
+Audio_Playback::Audio_Playback():
+   strAudioFile("STARTMUSIC"),
+   _ptrMusicPlayed(NULL){
 
 }
 
 // starts the SDL audio functions
-void Audio::StartAudio(){
+void Audio_Playback::StartAudio(){
    // initialize audio
    SDL_Init(SDL_INIT_AUDIO);
    if (SDL_Init(SDL_INIT_AUDIO != 0)){
@@ -37,21 +36,21 @@ void Audio::StartAudio(){
 
 
 // function to play the music in background
-void Audio::_PlayMusic(std::string audioFile){
+void Audio_Playback::_PlayMusic(std::string strAudioFile){
 
    // search for music in Resources
-   ResourceLinker resourceLinker;
-   resourceLinker.LoadResources("Audio",audioFile);
+   File_Manager file_manager;
+   file_manager.LinkResources("Audio",strAudioFile);
    //printf("file path used %s\n",resourceLinker._filePath.c_str());
 
    // Load the Music specific musicfile
-   _musicPlayed = Mix_LoadMUS("Resources/Audio/game_music_0.ogg");
-   if(!_musicPlayed){
+   _ptrMusicPlayed = Mix_LoadMUS("Resources/Audio/game_music_0.ogg");
+   if(!_ptrMusicPlayed){
      printf( "Failed to load Audio(Music): %s\n", Mix_GetError());
   }
 
   // play the music forever (,-1) eq. zero on success
-  if(Mix_PlayMusic(_musicPlayed, -1) == -1) {
+  if(Mix_PlayMusic(_ptrMusicPlayed, -1) == -1) {
         printf("Mix_PlayMusic: %s\n", Mix_GetError());
   }
 }

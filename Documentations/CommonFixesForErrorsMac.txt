@@ -5,5 +5,9 @@ Common fixes for Errors created by compiling program.
    2. write wrong to variable (for example to vector with [i] not push_back)
    3. wrong declaration in the constructor in the cpp file
       3.1 std::string don't like to be (NULL)
+
 -> SDL_Mixer "error for object 0x...: pointer being freed was not allocated"
-   1. 
+   1.
+
+-> Undefined symbols for architecture x86_64:
+   1. class/function typed different in different places
