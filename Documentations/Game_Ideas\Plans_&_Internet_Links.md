@@ -1,4 +1,4 @@
-#Game Ideas\Plans & Internet Links
+# Game Ideas\Plans & Internet Links
 
 copyrights by Lukas Guz, Felix Korthals
 #
