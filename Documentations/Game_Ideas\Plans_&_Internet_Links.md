@@ -32,6 +32,7 @@ copyrights by Lukas Guz, Felix Korthals
 ### Technology related ideas
 - **Building types/permission**
 - **military**
+- **Some sort of KI with option to destroy you**
 
 ### Different Nation/Races ideas
 - **different Nations**
@@ -48,6 +49,7 @@ copyrights by Lukas Guz, Felix Korthals
 - **natural disasters**
    * meteorite shower
    * earthquake
+- **Austin Powers ship is invading ;)**
 
 #######################################################################################
 
