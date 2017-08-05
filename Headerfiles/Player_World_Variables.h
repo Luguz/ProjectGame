@@ -23,11 +23,11 @@ public:
 
    // function to create starting world
    std::vector<int> vecWorldVector;   // vector with surface types
-   std::vector<int>* vecPtrWorldVector = &vecWorldVector;
+
 
    // basic Variables selected by the player to create game
    int iWorldsize = 100;                             // World size
-   int* iPtrWorldsize = &iWorldsize;
+
    std::string strBiomeType;                   // string with Biome type
    //function to create basic surface
    void BasicWorldCreation();
