@@ -1,5 +1,6 @@
 Common fixes for Errors created by compiling program.
 
+MAC:
 -> Segmentation fault 11:
    1. Vector to long -> not a fix!
    2. write wrong to variable (for example to vector with [i] not push_back)
@@ -14,3 +15,7 @@ Common fixes for Errors created by compiling program.
 
 -> Undefined symbols for architecture x86_64:
    1. class/function typed different in different places
+
+LINUX:
+-> Speicherzugriffsfehler (Speicherabzug geschrieben)
+   1. printf richtige Verlinkung (%i oder %s überprüfen)
