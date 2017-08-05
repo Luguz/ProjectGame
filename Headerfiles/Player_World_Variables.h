@@ -18,7 +18,7 @@ public:
    Player_World_Variables();
 
    // function to create starting world
-   std::vector<std::string> vecWorldVector;   // vector with surface types
+   std::vector<int> vecWorldVector;   // vector with surface types
 
    // basic Variables selected by the player to create game
    int iWorldsize;                             // World size
