@@ -5,7 +5,7 @@
 //    Game Project -> Space Strategy
 //
 //    NAMEHERE.h
-//    copyrights by Lukas Guz
+//    copyrights by Lukas Guz, Felix Korthals
 //
 
 
@@ -16,7 +16,7 @@
 class CLASSNAME{
 public:
    //constructor
-   CLASSNAME();                      
+   CLASSNAME();
 
 private:
 
@@ -33,7 +33,7 @@ private:
 //    Game Project -> Space Strategy
 //
 //    NAMEHERE.cpp
-//    copyrights by Lukas Guz
+//    copyrights by Lukas Guz, Felix Korthals
 //
 
 #include "NAMEHERE.h"

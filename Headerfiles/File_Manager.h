@@ -22,7 +22,7 @@ public:
    File_Manager();
 
    // function and variables to read files to load Resources
-   static std::string strFilePath;
+   std::string strFilePath;
    void LinkResources(std::string strFileType, std::string strNameObject);
 
    // function and variable to create, collect and save Errorcode

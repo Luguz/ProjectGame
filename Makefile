@@ -11,7 +11,7 @@ UNAME_S := $(shell uname -s)
 
 # CC (compiler for the chosen platform)
 ifeq ($(UNAME_S),Darwin)
-  CC := clang++
+  CC := g++
 else
   CC := g++
 endif

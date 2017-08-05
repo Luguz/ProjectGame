@@ -58,16 +58,16 @@ void Screen_Graphics::GraphicsControl(){
 
 //
 void Screen_Graphics::DrawWorldSurface(){
-   /*
+/*
    // running index
    int i = 0;
 
    // going through the _worldVector to draw World surface
    while(i < Player_World_Variables::iWorldsize){
 
-      Player_World_Variables::vecWorldVector[i]
+      Player_World_Variables::vecWorldVector[i];
       i++;
    }
-   */
+*/
 
 }

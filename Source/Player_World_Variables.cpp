@@ -9,24 +9,29 @@
 
 //constructor
 Player_World_Variables::Player_World_Variables()//:
-   //iWorldsize(0),
-   //vecWorldVector(0)
+   //iWorldsize(1000),
+   //vecWorldVector(nullptr)
    {
-     iWorldsize = 0;
-     vecWorldVector = 0;
 }
 
-void Player_World_Variables::BasicWorldCreation(std::string strBiomeType, int iWorldsize){
+//destructor
+Player_World_Variables::~Player_World_Variables(){
+
+}
+
+void Player_World_Variables::BasicWorldCreation(){
 
    // running index
    int i = 0;
 
    // fill the world
-   while(i < iWorldsize+1){
+   while(i < iWorldsize){
    vecWorldVector.push_back(1);
    i++;
    }
-   printf(" World-Vector created object in vector: %i\n"
-            ,vecWorldVector[iWorldsize] );
 
+
+   printf(" World-Vector created object in vector: %i\n"
+            // -1 because it begins with 0
+            ,vecWorldVector[iWorldsize-1] );
 }

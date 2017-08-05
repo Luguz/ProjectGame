@@ -9,7 +9,7 @@
 
 //constructor
 File_Manager::File_Manager():
-   strFilePath(""),
+   //strFilePath(""),
    strErrorCode(""){
 }
 

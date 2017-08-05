@@ -43,7 +43,7 @@ void Main_Game::_InitSystems(){
 
    // creates world surface
    Player_World_Variables player_world_variables;
-   player_world_variables.BasicWorldCreation("EarthMoon",10000);
+   player_world_variables.BasicWorldCreation();
 
    // starts Audio functions
    Audio_Playback audio_playback;
