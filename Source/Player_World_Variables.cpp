@@ -8,9 +8,12 @@
 #include "Player_World_Variables.h"
 
 //constructor
-Player_World_Variables::Player_World_Variables():
-   iWorldsize(0),
-   vecWorldVector(0){
+Player_World_Variables::Player_World_Variables()//:
+   //iWorldsize(0),
+   //vecWorldVector(0)
+   {
+     iWorldsize = 0;
+     vecWorldVector = 0;
 }
 
 void Player_World_Variables::BasicWorldCreation(std::string strBiomeType, int iWorldsize){
@@ -20,10 +23,10 @@ void Player_World_Variables::BasicWorldCreation(std::string strBiomeType, int iW
 
    // fill the world
    while(i < iWorldsize+1){
-   vecWorldVector.push_back("GROUND");
+   vecWorldVector.push_back(1);
    i++;
    }
-   printf(" World-Vector created object in vector: %s\n"
-            ,vecWorldVector[iWorldsize].c_str() );
+   printf(" World-Vector created object in vector: %i\n"
+            ,vecWorldVector[iWorldsize] );
 
 }
