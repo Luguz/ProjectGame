@@ -9,7 +9,8 @@
 
 //constructor
 Player_World_Variables::Player_World_Variables():
-   iWorldsize(10000)//,
+   iWorldsize(10000),
+   iWorldsizeSquare(0)//,
    //vecWorldVector(nullptr)
    {
 }
@@ -25,7 +26,7 @@ void Player_World_Variables::BasicWorldCreation(){
    int i = 0;           // for world vector
    int j = 0;           // for world mask
 
-   int iWorldsizeSquare = iWorldsize*iWorldsize;     // iworldsize in square
+   iWorldsizeSquare = iWorldsize*iWorldsize;     // iworldsize in square
 
    // fill the world
    while(i < iWorldsizeSquare){

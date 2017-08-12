@@ -61,16 +61,19 @@ void Screen_Graphics::GraphicsControl(){
 // Load Textures to use them later in DrawWorldSurface
 /*void Screen_Graphics::LoadTextures(){
    // create SDL Textures to be filled
-   SDL_Texture    *background;
-   _ptrSurface = IMG_Load("Resources/Textures/IsoGround.png");
-	background	= SDL_CreateTextureFromSurface(_ptrRenderer, _ptrSurface);
-	SDL_FreeSurface(_ptrSurface);
+
+
 
 }*/
 
 // Draws the surface out of Worldvector from Loaded Textures from LoadTextures
 void Screen_Graphics::DrawWorldSurface(){
-   /*
+
+   /*SDL_Texture    *background;
+   _ptrSurface = IMG_Load("Resources/Textures/IsoGround.png");
+   background	= SDL_CreateTextureFromSurface(_ptrRenderer, _ptrSurface);
+   SDL_FreeSurface(_ptrSurface);
+
    // running index
    int i = 0;
 
@@ -94,8 +97,8 @@ void Screen_Graphics::DrawWorldSurface(){
 
          // Destination of the Image on Screen
          SDL_Rect Dest;		//Destination of Image
-         Dest.x = 0;			//Destination set for x and y
-         Dest.y = 0;
+         Dest.x = 200;			//Destination set for x and y
+         Dest.y = 200;
          Dest.w = 100;		//Destination set for width and height
          Dest.h = 100;
 
@@ -103,12 +106,11 @@ void Screen_Graphics::DrawWorldSurface(){
             [Player_World_Variables::iWorldsize];
 
          // finally rendering
-         SDL_RenderCopy(rend, street1, &Src ,&Dest);
+         SDL_RenderCopy(_ptrRenderer, background, &Src ,&Dest);
 
          // running index +1
          i++;
          }
-   }
-   */
+   }*/
 
 }
