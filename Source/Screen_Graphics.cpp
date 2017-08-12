@@ -49,6 +49,8 @@ void Screen_Graphics::StartSDL(){
 // combines and manages all Graphic functions
 void Screen_Graphics::GraphicsControl(){
 
+   // Load Textures
+   //LoadTextures();
    // start the creating of World based on World-Vector
    DrawWorldSurface();
    // update window
@@ -56,18 +58,57 @@ void Screen_Graphics::GraphicsControl(){
 
 }
 
-//
+// Load Textures to use them later in DrawWorldSurface
+/*void Screen_Graphics::LoadTextures(){
+   // create SDL Textures to be filled
+   SDL_Texture    *background;
+   _ptrSurface = IMG_Load("Resources/Textures/IsoGround.png");
+	background	= SDL_CreateTextureFromSurface(_ptrRenderer, _ptrSurface);
+	SDL_FreeSurface(_ptrSurface);
+
+}*/
+
+// Draws the surface out of Worldvector from Loaded Textures from LoadTextures
 void Screen_Graphics::DrawWorldSurface(){
-/*
+   /*
    // running index
    int i = 0;
 
-   // going through the _worldVector to draw World surface
+   // going through the vecWorldVector to draw World surface
    while(i < Player_World_Variables::iWorldsize){
 
-      Player_World_Variables::vecWorldVector[i];
-      i++;
+      // check if 0 (nothing to render) is in the Worldvector
+      if(Player_World_Variables::vecWorldVector[i] == 0){
+         i++;
+      }
+
+      // if there is is somthing else render the object
+      else{
+
+         // Image from Source destination
+         SDL_Rect Src;		//Source of image
+         Src.x = 0;			//Source set for x and y
+         Src.y = 0;
+         Src.w = 100;		//Soruce set for width and height
+         Src.h = 100;
+
+         // Destination of the Image on Screen
+         SDL_Rect Dest;		//Destination of Image
+         Dest.x = 0;			//Destination set for x and y
+         Dest.y = 0;
+         Dest.w = 100;		//Destination set for width and height
+         Dest.h = 100;
+
+         Player_World_Variables::vecWorldVector
+            [Player_World_Variables::iWorldsize];
+
+         // finally rendering
+         SDL_RenderCopy(rend, street1, &Src ,&Dest);
+
+         // running index +1
+         i++;
+         }
    }
-*/
+   */
 
 }

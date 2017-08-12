@@ -11,7 +11,8 @@
 
 #include "Main_Game.h"
 
-#include <SDL2/SDL.h>
+#include <SDL2/SDL.h>         // basic SDL functions
+#include <SDL2/SDL_image.h>   // for Loading Images
 #include <stdio.h>
 #include <string>
 
@@ -35,7 +36,10 @@ private:
    SDL_Surface       *_ptrSurface       ;
    int               _iScreenWidth      ;
    int               _iScreenHeight     ;
+   // Load Textures from Surface needed by DrawWorldSurface
+   void LoadTextures();
 
+   // draw the World on Screen out of vecWorldVector
    void DrawWorldSurface();
 };
 
