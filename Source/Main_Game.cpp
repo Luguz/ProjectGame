@@ -38,12 +38,11 @@ void Main_Game::_GameLoop(){
 // initialize every important function/variable to run game
 void Main_Game::_InitSystems(){
    // creates the Window
-   Screen_Graphics screen_graphics;
-   screen_graphics.StartSDL();
-
-   // creates world surface
-   Player_World_Variables player_world_variables;
-   player_world_variables.BasicWorldCreation();
+   BaseSDL = Screen_Graphics();
+   BaseSDL.StartSDL();
+   // creates world surface for starting World (watch in class for parameter discribtion)
+   PlayerHomeBase = World_Vectors(1000,1);
+   //world_vectors.create_vecWorldVector("PlayerHomeBase",100, 1);
 
    // starts Audio functions
    Audio_Playback audio_playback;
@@ -65,6 +64,8 @@ SDL_Event evnt;                 // variable for events ( 1 = pending; 2 = none a
          // take mousemotion
          case SDL_MOUSEMOTION:
             break;
+         case SDLK_ESCAPE:
+            SDL_Quit();
          default:
             break;
        }
@@ -74,6 +75,5 @@ SDL_Event evnt;                 // variable for events ( 1 = pending; 2 = none a
 // draws the final game with help of Graphics.cpp
 void Main_Game::_DrawGame(){
    // starts all functions for creating the graphics
-   Screen_Graphics screen_graphics;
-   screen_graphics.GraphicsControl();
+   BaseSDL.GraphicsControl(PlayerHomeBase);
 }

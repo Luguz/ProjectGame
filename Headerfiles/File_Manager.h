@@ -15,7 +15,6 @@
 #include <fstream>      // write and read to/from file
 #include <time.h>       // get time
 
-
 class File_Manager{
 public:
    //constructor

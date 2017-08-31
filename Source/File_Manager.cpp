@@ -36,7 +36,7 @@ void File_Manager::LinkResources(std::string strFileType, std::string strNameObj
       while(std::getline(file, lines)){
          //search for the requested Object
          if (lines.find(strNameObject) != std::string::npos){
-            std:size_t pos = lines.find('"');
+            size_t pos = lines.find('"');
             strFilePath = lines.substr(pos);
          }
          // next line:

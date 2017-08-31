@@ -9,8 +9,8 @@
 
 
 Screen_Graphics::Screen_Graphics():
-   _iScreenWidth(500),
-   _iScreenHeight(500),
+   _iScreenWidth(1000),
+   _iScreenHeight(1000),
    _ptrWindow(NULL),
    _ptrRenderer(NULL),
    _ptrSurface(NULL){
@@ -18,6 +18,7 @@ Screen_Graphics::Screen_Graphics():
 }
 
 void Screen_Graphics::StartSDL(){
+
    // initialize everything
    SDL_Init(SDL_INIT_VIDEO);
    if (SDL_Init(SDL_INIT_VIDEO != 0)){
@@ -43,74 +44,83 @@ void Screen_Graphics::StartSDL(){
       SDL_DestroyWindow(_ptrWindow);
       SDL_Quit();
    }
-
 }
 
+
 // combines and manages all Graphic functions
-void Screen_Graphics::GraphicsControl(){
+void Screen_Graphics::GraphicsControl(World_Vectors HomeBase){
 
    // Load Textures
    //LoadTextures();
    // start the creating of World based on World-Vector
-   DrawWorldSurface();
-   // update window
+   DrawWorldSurface(HomeBase);
+   // update window (a function by SDL not written here)
    SDL_UpdateWindowSurface(_ptrWindow);
 
 }
 
 // Load Textures to use them later in DrawWorldSurface
-/*void Screen_Graphics::LoadTextures(){
+void Screen_Graphics::LoadTextures(){
+
    // create SDL Textures to be filled
-
-
-
-}*/
-
-// Draws the surface out of Worldvector from Loaded Textures from LoadTextures
-void Screen_Graphics::DrawWorldSurface(){
-
-   /*SDL_Texture    *background;
-   _ptrSurface = IMG_Load("Resources/Textures/IsoGround.png");
+   _ptrSurface = IMG_Load("Resources/Textures/ground.jpg");
    background	= SDL_CreateTextureFromSurface(_ptrRenderer, _ptrSurface);
    SDL_FreeSurface(_ptrSurface);
 
-   // running index
+   if (!background){
+         printf("error when creating texture: %s\n", SDL_GetError());
+         SDL_DestroyRenderer(_ptrRenderer);
+         SDL_DestroyWindow(_ptrWindow);
+         SDL_Quit();
+         exit(EXIT_FAILURE);
+      }
+}
+
+// Draws the surface out of Worldvector from Loaded Textures from LoadTextures
+void Screen_Graphics::DrawWorldSurface(World_Vectors HomeBase){
+   printf("DrawWorldSurface wird aufgerufen");
+   //return;
+   printf("World vector created?:%i\n",HomeBase.get_vecWorldVector(21));
+   // Image from Source destination
+   SDL_Rect Src;		//Source of image
+   Src.x = 0;			//Source set for x and y
+   Src.y = 0;
+   Src.w = 100;		//Soruce set for width and height
+   Src.h = 100;
+
+   // Destination of the Image on Screen
+   SDL_Rect Dest;		//Destination of Image
+   //Dest.x = 0;			//Destination set for x and y
+   //Dest.y = 0;
+   Dest.w = 100;		//Destination set for width and height
+   Dest.h = 100;
+
+
+   int ObjectSize = 100;
    int i = 0;
+   int DestPosX = 0;
+   int DestPosY = 0;
 
-   // going through the vecWorldVector to draw World surface
-   while(i < Player_World_Variables::iWorldsize){
+   while(i < 10000){
 
-      // check if 0 (nothing to render) is in the Worldvector
-      if(Player_World_Variables::vecWorldVector[i] == 0){
-         i++;
+      if(DestPosX < 10 && Dest.y <= 200){
+         Dest.x = DestPosX*ObjectSize;
+         DestPosX++;
+         //printf("-x%i",Dest.x);
+         //printf("-y%i",Dest.y);
       }
 
-      // if there is is somthing else render the object
-      else{
+      if(DestPosX == 10){
+         DestPosX = 0;
+         DestPosY += 100;
+         Dest.y += 100;
+         //printf("Debug\n");
+      }
 
-         // Image from Source destination
-         SDL_Rect Src;		//Source of image
-         Src.x = 0;			//Source set for x and y
-         Src.y = 0;
-         Src.w = 100;		//Soruce set for width and height
-         Src.h = 100;
+      i++;
+      SDL_RenderCopy(_ptrRenderer, background, &Src, &Dest);
+   }
 
-         // Destination of the Image on Screen
-         SDL_Rect Dest;		//Destination of Image
-         Dest.x = 200;			//Destination set for x and y
-         Dest.y = 200;
-         Dest.w = 100;		//Destination set for width and height
-         Dest.h = 100;
-
-         Player_World_Variables::vecWorldVector
-            [Player_World_Variables::iWorldsize];
-
-         // finally rendering
-         SDL_RenderCopy(_ptrRenderer, background, &Src ,&Dest);
-
-         // running index +1
-         i++;
-         }
-   }*/
-
+   SDL_RenderPresent(_ptrRenderer);
+   Dest.y= 0;
 }
