@@ -2,7 +2,7 @@
 //    Game Project -> Space Strategy
 //
 //    MainGame.h
-//    copyrights by Lukas Guz
+//    copyrights by Lukas Guz, Felix Korthals
 //
 
 
@@ -18,25 +18,56 @@
 #include "Audio_Playback.h"
 #include "World_Vectors.h"
 
-enum class clGameState{PLAY, EXIT, PAUSE};  // class that contains diff. gamestates
+enum class clGameState{START, PLAY, EXIT, PAUSE};  // class that contains diff. gamestates
 
 class Main_Game{
-   clGameState _clGameState;              // variable to control gamestatus
-   World_Vectors PlayerHomeBase;
+
+/************************ Classes to include in Main_Game *********************/
+
+   // variable to control gamestatus (PLAY,PAUSE,etc.)
+   clGameState _clGameState;
+
+/*                             Base-Functionalities                           */
+
+   // include graphic functionalities in Main_Game
    Screen_Graphics BaseSDL;
+   // include audio functionalities in Main_Game
+   Audio_Playback AudioSDL;
+   // include file management functionalities in Main_Game
+   File_Manager FileSteam;
 
-   void _InputCheck();                    // monitors the input
+/*                            Game-Variable-Functions                         */
 
-   void _GameLoop();                       // decides if Game runs etc.
-   void _InitSystems();                    // initialize basic Systems
+   // world creation of Player-Home-Base
+   int iPlayerWorldSize;                  // size of the Player World
+   World_Vectors PlayerHomeBase;          // main Player starting World
 
-   void _DrawGame();                       // draws game
+/*************************** Main_Game functions ******************************/
 
+   // monitors the input (SDL_Event)
+   void _InputCheck();
+
+   // decides if Game runs etc. -> Loop
+   void _GameLoop();
+   // initialize basic Systems -> SDL (Video,Music)
+   void _InitSystems();
+
+   // draws game (Graphics)
+   void _DrawGame();
+
+/**************************** PUPLIC ******************************************/
 public:
 
-   Main_Game();                           // constructor
+/******************************************************************************/
 
-   void RunGame();                        // starts the game (the loop)
+   // constructor
+   Main_Game();
+
+/*                            Start The Game!                                 */
+
+   // starts the game -> Loop, init. Systems
+   void RunGame();
+
 };
 
 

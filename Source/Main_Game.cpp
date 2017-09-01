@@ -7,13 +7,29 @@
 
 #include "Main_Game.h"
 
-// constructor
-Main_Game::Main_Game():
-   _clGameState(clGameState::PLAY){
+/************ Constructor *****************************************************/
 
-   }
+/*                             Standard-Constructor                           */
+
+Main_Game::Main_Game(): _clGameState(clGameState::PLAY){  // Gamestate = PLAY
+
+/*                           Basic-Game-functionalities                       */
+
+   // allow SDL functions (Graphics) via BaseSDL in Main_Game
+   BaseSDL = Screen_Graphics();
+   // allow SDL functions (Audio) via AudioSDL in Main_Game
+   AudioSDL = Audio_Playback();
+
+/*                        Game-variables                                      */
+
+   iPlayerWorldSize = 1000;
+
+}
+
+/************ Starts the main Game functions **********************************/
 
 // basic public start function -> used in main.cpp
+
 void Main_Game::RunGame(){
    // initialize the basic game-functions
    _InitSystems();
@@ -21,37 +37,47 @@ void Main_Game::RunGame(){
    _GameLoop();
 }
 
+/************ Loop of the whole Game ******************************************/
+
 // this loop is used by other functions to close the game
 // let the important functions work as long game runs
+
 void Main_Game::_GameLoop(){
-   // functions that checks the Gamestate
+   // functions that checks the Gamestate -> Loop
    while(_clGameState != clGameState::EXIT){
       // input check
       _InputCheck();
       // draw the game
       _DrawGame();
    }
+   // Quit Game if Loop ends
    Mix_Quit();
    SDL_Quit();
 }
 
+/************ initialize Basic Game Systems ***********************************/
+
 // initialize every important function/variable to run game
+
 void Main_Game::_InitSystems(){
+
+   // creates world surface for starting World
+   PlayerHomeBase = World_Vectors(iPlayerWorldSize);
+
    // creates the Window
-   BaseSDL = Screen_Graphics();
    BaseSDL.StartSDL();
-   // creates world surface for starting World (watch in class for parameter discribtion)
-   PlayerHomeBase = World_Vectors(1000,1);
-   //world_vectors.create_vecWorldVector("PlayerHomeBase",100, 1);
 
    // starts Audio functions
-   Audio_Playback audio_playback;
-   audio_playback.StartAudio();
+   AudioSDL.StartAudio();
+
 }
 
+/************ input Check of Player *******************************************/
+
 // checks the input from player
+
 void Main_Game::_InputCheck(){
-SDL_Event evnt;                 // variable for events ( 1 = pending; 2 = none available)
+SDL_Event evnt;      // variable for events ( 1 = pending; 2 = none available)
 
    // process inputs
    while (SDL_PollEvent(&evnt)) // while event true (=1)
@@ -72,8 +98,11 @@ SDL_Event evnt;                 // variable for events ( 1 = pending; 2 = none a
    }
 }
 
+/************ Start the graphics of the Game **********************************/
+
 // draws the final game with help of Graphics.cpp
+
 void Main_Game::_DrawGame(){
    // starts all functions for creating the graphics
-   BaseSDL.GraphicsControl(PlayerHomeBase);
+   BaseSDL.GraphicsControl(PlayerHomeBase, iPlayerWorldSize);
 }

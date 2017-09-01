@@ -12,24 +12,35 @@
 #include <string>
 #include <vector>
 
-
-
 class World_Vectors{
-   // world vector including all information about the created word surface
-   std::vector<int> vecWorldVector;     // vector with surface types
+/************ Structure to contain world informations *************************/
 
+   // world vector including all information about the created word surface
+   std::vector<int> vecWorldVector;
+
+
+/************* PUPLIC *********************************************************/
 public:
+
+/************ Constructors ****************************************************/
+
    // standard constructor
    World_Vectors();
-   /************Player World*********************************************/
-   //constructor (creating worlds by size and biome)
-   World_Vectors(int iWorldsize, int iWorldBiome);
-   //destructor
-   ~World_Vectors();
-   /*********************************************************************/
 
-   //function to create world surfaces
-   void create_vecWorldVector(std::string strNameOfWorld ,int iWorldsize, int iWorldBiome);
+/*                       consturctors for worlds                              */
+
+   // world vector with base functionalities
+   World_Vectors(int iWorldsize);
+
+
+/************ Destructor ******************************************************/
+
+   // standard destructor
+   ~World_Vectors();
+
+/************ World_Vectors functions *****************************************/
+
+   //function to get info of spezific place in World_Vectors
    int  get_vecWorldVector(int iPosOnWorld);
 
 };

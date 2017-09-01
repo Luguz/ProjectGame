@@ -7,18 +7,21 @@
 
 #include "World_Vectors.h"
 
-// List of Biome Types
-#define StandardMoon 1;
+
+
+/****************** Constructors **********************************************/
+
+/*                             Standard-Constructor                           */
 
 // Standard constructor
 World_Vectors::World_Vectors(){
 
 }
 
-/******************This is spezific for the Player World ***************************************/
+/*                      Constructor- Basic/Minimum World                      */
 
-// constructor
-World_Vectors::World_Vectors( int iWorldsize, int iWorldBiome){
+// constructor for basic world type
+World_Vectors::World_Vectors(int iWorldsize){
    // debug features for iWorldsize
       if(iWorldsize > 10000000){ iWorldsize = 10000000;};  // max Worldsize
       if(iWorldsize < 100){ iWorldsize = 100; };           // min  Worldsize
@@ -32,24 +35,18 @@ World_Vectors::World_Vectors( int iWorldsize, int iWorldBiome){
       }while(k < (iWorldsize*iWorldsize));
 }
 
+/****************** Destructors ***********************************************/
 
-
-// destructor
+// standard Destructor
 World_Vectors::~World_Vectors(){
 
 }
 
-void World_Vectors::create_vecWorldVector(std::string strNameOfWorld,int iWorldsize, int strWorldBiome){
 
-      World_Vectors PlayerHomeBase(iWorldsize,1);
-
-}
-
-/***********************************************************************************************/
+/****************** get specific World_Vectors info ***************************/
 
 int World_Vectors::get_vecWorldVector(int iPosOnWorld){
 
-  int a = vecWorldVector[5];
-  //return vecWorldVector[5];
-  return a;
+  return vecWorldVector[iPosOnWorld];
+
 }

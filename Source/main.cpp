@@ -13,9 +13,15 @@
 
 int main(int, char**) {
 
-   // start the game !!!
-   Main_Game main_game;
-   main_game.RunGame();
+   // include Main_Game in main
+   Main_Game MainGame;
+
+
+   // load constructor
+   MainGame = Main_Game();
+   // start the Game
+   MainGame.RunGame();
+
 
    return 0;
 
