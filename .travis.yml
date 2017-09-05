@@ -28,4 +28,7 @@ before_install:
 
 install: make get-deps
 
-script: make
+script:
+   - make clean
+   - make
+   - ./Bin/GameProject

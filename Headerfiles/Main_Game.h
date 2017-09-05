@@ -36,13 +36,20 @@ class Main_Game{
    // include file management functionalities in Main_Game
    File_Manager FileSteam;
 
+
+
+/*************************** Main_Game functions ******************************/
+
 /*                            Game-Variable-Functions                         */
 
    // world creation of Player-Home-Base
    int iPlayerWorldSize;                  // size of the Player World
    World_Vectors PlayerHomeBase;          // main Player starting World
 
-/*************************** Main_Game functions ******************************/
+/*                            Graphic-Parameter                               */
+
+   int iSelectedScreenWidth;
+   int iSelectedScreenHeigth;
 
    // monitors the input (SDL_Event)
    void _InputCheck();

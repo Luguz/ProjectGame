@@ -1,5 +1,7 @@
 Common fixes for Errors created by compiling program.
 
+   TRY MAKE CLEAN FIRST !
+
 MAC:
 -> Segmentation fault 11:
    1. Vector to long -> not a fix!

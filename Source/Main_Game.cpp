@@ -20,9 +20,15 @@ Main_Game::Main_Game(): _clGameState(clGameState::PLAY){  // Gamestate = PLAY
    // allow SDL functions (Audio) via AudioSDL in Main_Game
    AudioSDL = Audio_Playback();
 
-/*                        Game-variables                                      */
+/*                           Graphic-Parameter                                */
 
-   iPlayerWorldSize = 1000;
+   // Resolution Settings
+   iSelectedScreenWidth =  1680;       // Screen width
+   iSelectedScreenHeigth = 1050;        // Screen height
+
+/*                            Game-variables                                  */
+   // Size of the World Home Base
+   iPlayerWorldSize = 8;            // must be a tens potency
 
 }
 
@@ -65,7 +71,7 @@ void Main_Game::_InitSystems(){
    PlayerHomeBase = World_Vectors(iPlayerWorldSize);
 
    // creates the Window
-   BaseSDL.StartSDL();
+   BaseSDL.StartSDL(iSelectedScreenWidth,iSelectedScreenHeigth);
 
    // starts Audio functions
    AudioSDL.StartAudio();
@@ -104,5 +110,5 @@ SDL_Event evnt;      // variable for events ( 1 = pending; 2 = none available)
 
 void Main_Game::_DrawGame(){
    // starts all functions for creating the graphics
-   BaseSDL.GraphicsControl(PlayerHomeBase, iPlayerWorldSize);
+   BaseSDL.GraphicsControl(PlayerHomeBase, iPlayerWorldSize, iSelectedScreenWidth);
 }

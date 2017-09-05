@@ -17,7 +17,8 @@ class World_Vectors{
 
    // world vector including all information about the created word surface
    std::vector<int> vecWorldVector;
-
+   // number of Tiles in (size of vecWorldVector) based on WorldSize
+   int iNumberTiles;
 
 /************* PUPLIC *********************************************************/
 public:
@@ -40,9 +41,10 @@ public:
 
 /************ World_Vectors functions *****************************************/
 
-   //function to get info of spezific place in World_Vectors
-   int  get_vecWorldVector(int iPosOnWorld);
-
+   // function to get info of spezific place in World_Vectors
+   int  get_vecWorldVectorTile(int iPosOnWorld);
+   // function to get the number of the Tiles of World_Vector
+   int get_vecWorldVectorSize(); 
 };
 
 

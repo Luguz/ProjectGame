@@ -11,8 +11,7 @@
 
 // constructor to initialize the variables
 Screen_Graphics::Screen_Graphics():
-   _iScreenWidth(1000), _iScreenHeight(1000), _ptrWindow(NULL),
-   _ptrRenderer(NULL), _ptrSurface(NULL){
+    _ptrWindow(NULL), _ptrRenderer(NULL), _ptrSurface(NULL){
 
       Src.x = 0;			//Source set for x and y
       Src.y = 0;
@@ -29,7 +28,7 @@ Screen_Graphics::Screen_Graphics():
 /****************** Start SDL (Graphics) **************************************/
 
 // function to start the basic SDL (Graphic) functionalities
-void Screen_Graphics::StartSDL(){
+void Screen_Graphics::StartSDL(int iScreenWidth, int iScreenHeight){
 
    // initialize everything
    SDL_Init(SDL_INIT_VIDEO);
@@ -39,7 +38,7 @@ void Screen_Graphics::StartSDL(){
 
    // create the window
    SDL_Window *_ptrWindow = SDL_CreateWindow("GameProject", SDL_WINDOWPOS_CENTERED,
-      SDL_WINDOWPOS_CENTERED, _iScreenWidth, _iScreenHeight, SDL_WINDOW_SHOWN);
+      SDL_WINDOWPOS_CENTERED, iScreenWidth, iScreenHeight, SDL_WINDOW_SHOWN);
    if (!_ptrWindow){
       printf("error creating window: %s\n", SDL_GetError());
       SDL_Quit();
@@ -50,7 +49,7 @@ void Screen_Graphics::StartSDL(){
 
    // create renderer
    _ptrRenderer = SDL_CreateRenderer(_ptrWindow,-1,SDL_RENDERER_ACCELERATED
-      |SDL_RENDERER_PRESENTVSYNC);
+      | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
    if(!_ptrRenderer){
       printf("error creating renderer: %s\n", SDL_GetError());
       SDL_DestroyWindow(_ptrWindow);
@@ -61,13 +60,13 @@ void Screen_Graphics::StartSDL(){
 /****************** Control the functionalities of SDL (Graphics) *************/
 
 // combines and manages all Graphic functions
-void Screen_Graphics::GraphicsControl(World_Vectors WorldVector, int iWorldSize){
+void Screen_Graphics::GraphicsControl(World_Vectors vecWorldVector, int iWorldSize, int iScreenWidth){
 
    // Load Textures
    LoadTextures();
 
    // draws the World Surface of the chosen Vector
-   DrawWorldSurface(WorldVector, iWorldSize);
+   DrawWorldSurface(vecWorldVector, iWorldSize, iScreenWidth);
 
    // update window (a function by SDL)
    SDL_UpdateWindowSurface(_ptrWindow);
@@ -77,35 +76,61 @@ void Screen_Graphics::GraphicsControl(World_Vectors WorldVector, int iWorldSize)
 /****************** Draw the Graphics on Screen *******************************/
 
 // Draws the surface out of Worldvector from Loaded Textures from LoadTextures
-void Screen_Graphics::DrawWorldSurface(World_Vectors WorldVector, int iWorldSize){
+void Screen_Graphics::DrawWorldSurface(World_Vectors vecWorldVector, int iWorldSize, int iScreenWidth){
 
    // basic variables to realize drawing
-   int ObjectSize = 100;   // size of the Object to be drawn
-   int i = 0;              // running index
-   int DestPosX = 0;       // postion of Object on Screen in X-Direction
-   int DestPosY = 0;       // postion of Object on Screen in Y-Direction
+   int iObjectSize = 100;   // size of Object to be drawn in X direction
+   //int iObjectSizeY = 100;  // size of Object to be drawn in Y direction
 
+   // running indexes
+   int i = 0;           // running through the size of iWorldsize
+   int j = 1;           // limits/determines the number of numbers in a row
+   int h = 0;           // running index for going through the number of numbers in row
+
+   int iNumberTiles = vecWorldVector.get_vecWorldVectorSize(); // actual number of Fields in WorldVector
+
+   //Dest.x = ((iScreenWidth/2) - (iObjectSize/2));   // set Dest.x for placement of first tile
 
    // main function to draw the game
    // (done/checked for every postion in WorldVector)
 
-   while(i < 10000){
+   for(i = 0; i < iWorldSize*2+3; i++){
 
-      if(DestPosX < 10 && Dest.y <= 200){
-         Dest.x = DestPosX*ObjectSize;
-         DestPosX++;
+      // sets the Destination in X direction:
+      do{
+         // fist for the upper half of the square
+         if(i <= iWorldSize){
+            Dest.x =( ((iScreenWidth/2-iObjectSize/2*j)+(iObjectSize*h) ));
+            h++;
+         }
+         // second for the lower half of the square
+         else{
+            Dest.x =( ((iScreenWidth/2-iObjectSize/2*j)+(iObjectSize*h) ));
+            h++;
+         }
+
+         // decide whats to be drawn on Screen
+         switch (vecWorldVector.get_vecWorldVectorTile(i)) {
+
+            // draw nothing (other building will be drawn later)
+            case 0:
+                     break;
+            // draw background
+            case 1:  SDL_RenderCopy(_ptrRenderer, background, &Src, &Dest);
+                     break;
+         }
+      } while(h <= j-1);      // the limit of elements in a row
+
+      // prepare Variables for next run
+
+      h = 0;   // reset to start at fist point of rows in X dir
+      if(i <= iWorldSize){
+         j++;     // reset how often h must be added (number of elements in row)
       }
-
-      if(DestPosX == 10){
-         DestPosX = 0;
-         DestPosY += 100;
-         Dest.y += 100;
+      if(i > iWorldSize){
+         j--;     // lower half of square elements are decreasing
       }
-
-      // next postion on WorldVector
-      i++;
-      // put new "Screen-Graphics-State" in Renderer
-      SDL_RenderCopy(_ptrRenderer, background, &Src, &Dest);
+      Dest.y += (iObjectSize/2);  // next "line" on Screen
    }
 
    // Render whats calculated by checking the WorldVector
@@ -120,8 +145,10 @@ void Screen_Graphics::DrawWorldSurface(World_Vectors WorldVector, int iWorldSize
 // Load Textures to use them later in DrawWorldSurface
 void Screen_Graphics::LoadTextures(){
 
+   // initialize loading of png's
+   IMG_Init( IMG_INIT_PNG );
    // create SDL Textures to be filled
-   _ptrSurface = IMG_Load("Resources/Textures/ground.jpg");
+   _ptrSurface = IMG_Load("Resources/Textures/groundTile_NE.png");
    background	= SDL_CreateTextureFromSurface(_ptrRenderer, _ptrSurface);
    SDL_FreeSurface(_ptrSurface);
 
@@ -130,6 +157,7 @@ void Screen_Graphics::LoadTextures(){
          printf("error when creating texture: %s\n", SDL_GetError());
          SDL_DestroyRenderer(_ptrRenderer);
          SDL_DestroyWindow(_ptrWindow);
+         IMG_Quit();
          SDL_Quit();
          exit(EXIT_FAILURE);
       }

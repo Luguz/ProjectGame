@@ -21,11 +21,9 @@ class Screen_Graphics{
 /************ Variables for the Window ****************************************/
 
    // window related variables
-   SDL_Window        *_ptrWindow        ;    // save window information
-   SDL_Renderer      *_ptrRenderer      ;    // save render information
-   SDL_Surface       *_ptrSurface       ;    // save surface information
-   int               _iScreenWidth      ;    // screen width
-   int               _iScreenHeight     ;    // screen height
+   SDL_Window        *_ptrWindow          ;    // save window information
+   SDL_Renderer      *_ptrRenderer        ;    // save render information
+   SDL_Surface       *_ptrSurface         ;    // save surface information
 
 /************ Variables to draw Window ****************************************/
 
@@ -42,7 +40,7 @@ class Screen_Graphics{
    void LoadTextures();
 
    // draw the World on Screen out of vecWorldVector
-   void DrawWorldSurface(World_Vectors, int);
+   void DrawWorldSurface(World_Vectors, int, int);
 
    // list of Textures needed to be loaded in Game
    SDL_Texture    *background;
@@ -58,10 +56,10 @@ public:
 /************ Screen_Graphic functions ****************************************/
 
    // starts basic SDL instances
-   void StartSDL();
+   void StartSDL(int, int);
 
    // manages graphic-functions(SDL) and changes
-   void GraphicsControl(World_Vectors, int);
+   void GraphicsControl(World_Vectors, int, int);
 
 };
 
