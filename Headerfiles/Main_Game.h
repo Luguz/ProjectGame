@@ -34,8 +34,7 @@ class Main_Game{
    // include audio functionalities in Main_Game
    Audio_Playback AudioSDL;
    // include file management functionalities in Main_Game
-   File_Manager FileSteam;
-
+   File_Manager FileStream;
 
 
 /*************************** Main_Game functions ******************************/
@@ -48,8 +47,14 @@ class Main_Game{
 
 /*                            Graphic-Parameter                               */
 
-   int iSelectedScreenWidth;
-   int iSelectedScreenHeigth;
+   // Screen Resolution
+   int iSelectedScreenWidth;        // Width
+   int iSelectedScreenHeigth;       // Heigth
+   // Camera Variables
+   int iCameraEdgeState;            // camera on/in edge/corner? -> see documentation for variable info
+   int iMousePosX;                  // position mouse in x
+   int iMousePosY;                  // position mouse in y
+   int iEdgeSize;                   // size of edge-area in which scrolling begins (for simpler use)
 
    // monitors the input (SDL_Event)
    void _InputCheck();

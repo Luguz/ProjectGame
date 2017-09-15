@@ -12,23 +12,27 @@
 /*                             Standard-Constructor                           */
 
 Main_Game::Main_Game(): _clGameState(clGameState::PLAY){  // Gamestate = PLAY
+/*                           Graphic-Parameter                                */
+
+   // Resolution Settings
+   iSelectedScreenWidth =  1600;       // Screen width
+   iSelectedScreenHeigth = 900 ;       // Screen height
+   // Camera variables: Edge State (on start 0), mouse in middle of screen
+   iCameraEdgeState = 0;               // no scrolling on start
+   iMousePosX = iSelectedScreenWidth;  // set x on start (just to init.)
+   iMousePosY = iSelectedScreenHeigth; // set y on start (just to init.)
+   iEdgeSize  = 15;                    // area from screen edges in which you scroll
 
 /*                           Basic-Game-functionalities                       */
 
    // allow SDL functions (Graphics) via BaseSDL in Main_Game
-   BaseSDL = Screen_Graphics();
+   BaseSDL = Screen_Graphics(iSelectedScreenWidth, iSelectedScreenHeigth);
    // allow SDL functions (Audio) via AudioSDL in Main_Game
    AudioSDL = Audio_Playback();
 
-/*                           Graphic-Parameter                                */
-
-   // Resolution Settings
-   iSelectedScreenWidth =  1680;       // Screen width
-   iSelectedScreenHeigth = 1050;        // Screen height
-
 /*                            Game-variables                                  */
    // Size of the World Home Base
-   iPlayerWorldSize = 8;            // must be a tens potency
+   iPlayerWorldSize = 100;            // must be a tens potency
 
 }
 
@@ -74,7 +78,7 @@ void Main_Game::_InitSystems(){
    BaseSDL.StartSDL(iSelectedScreenWidth,iSelectedScreenHeigth);
 
    // starts Audio functions
-   AudioSDL.StartAudio();
+   //AudioSDL.StartAudio();
 
 }
 
@@ -91,12 +95,50 @@ SDL_Event evnt;      // variable for events ( 1 = pending; 2 = none available)
        switch (evnt.type) {
          // Quit game with close window button
          case SDL_QUIT:
+            printf("Quit Button pressed\n");
             _clGameState = clGameState::EXIT;
             break;
-         // take mousemotion
+
+         // take mousemotion (for now for the camera scrolling)
+         // for information depending iCameraEdgeState see documentation
          case SDL_MOUSEMOTION:
+            int x,y;
+            SDL_GetMouseState(&x,&y);
+            iMousePosX = x;
+            iMousePosY = y;
+
+
+            // mouse is on no screen edge (reset of iCameraEdgeState):
+            if (iMousePosX > 0 && iMousePosX < iSelectedScreenWidth && iMousePosY > 0 && iMousePosY < iSelectedScreenHeigth){
+               iCameraEdgeState = 0;
+            }
+
+            // all 8 edge/edgecorner combinations: (edge size set bit higher)
+
+            // top left
+            if(iMousePosY <= iEdgeSize && iMousePosX <= iEdgeSize) { iCameraEdgeState = 1;}
+            // top
+            if(iMousePosY == 0 && iMousePosX > iEdgeSize && iMousePosX < iSelectedScreenWidth-iEdgeSize ){ iCameraEdgeState = 2;}
+            //top right
+            if(iMousePosY <= iEdgeSize && iMousePosX >= iSelectedScreenWidth-iEdgeSize ){ iCameraEdgeState = 3;}
+
+            // rigth
+            if(iMousePosY > iEdgeSize && iMousePosY < iSelectedScreenHeigth-iEdgeSize && iMousePosX >= iSelectedScreenWidth-iEdgeSize ){ iCameraEdgeState = 4;}
+
+            // bottom rigth
+            if(iMousePosY >= iSelectedScreenHeigth-iEdgeSize && iMousePosX >= iSelectedScreenWidth-iEdgeSize ){ iCameraEdgeState = 5;}
+            // bottom
+            if(iMousePosY >= iSelectedScreenHeigth-iEdgeSize && iMousePosX < iSelectedScreenWidth-iEdgeSize && iMousePosX > iEdgeSize){ iCameraEdgeState = 6;}
+            // bottom left
+            if(iMousePosY >= iSelectedScreenHeigth-iEdgeSize && iMousePosX <= iEdgeSize){ iCameraEdgeState = 7;}
+
+            // left
+            if(iMousePosY < iSelectedScreenHeigth-iEdgeSize && iMousePosY > iEdgeSize && iMousePosX <= iEdgeSize){ iCameraEdgeState = 8;}
+
+         // end of SDL_MOUSEMOTION
             break;
          case SDLK_ESCAPE:
+            _clGameState = clGameState::EXIT;
             SDL_Quit();
          default:
             break;
@@ -110,5 +152,6 @@ SDL_Event evnt;      // variable for events ( 1 = pending; 2 = none available)
 
 void Main_Game::_DrawGame(){
    // starts all functions for creating the graphics
-   BaseSDL.GraphicsControl(PlayerHomeBase, iPlayerWorldSize, iSelectedScreenWidth);
+   BaseSDL.GraphicsControl(PlayerHomeBase, iPlayerWorldSize, iSelectedScreenHeigth
+      ,iSelectedScreenWidth, iCameraEdgeState);
 }

@@ -1,0 +1,2 @@
+- Graphic related:
+   -> iCameraEdgeState : (0 no edge, 1 top_left, 2 top , 3 top_right, 4 right ...) clockwise till, 8 left

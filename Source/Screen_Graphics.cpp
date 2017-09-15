@@ -9,9 +9,22 @@
 
 /****************** Constructors **********************************************/
 
+// Standard-Constructor
+Screen_Graphics::Screen_Graphics(){
+
+}
+
 // constructor to initialize the variables
-Screen_Graphics::Screen_Graphics():
+Screen_Graphics::Screen_Graphics(int iScreenWidth, int iScreenHeight):
     _ptrWindow(NULL), _ptrRenderer(NULL), _ptrSurface(NULL){
+
+      // allow use of camera from camera class
+      PlayerCamera = Screen_Camera(100, 100, 1, 1, iScreenWidth, iScreenHeight);
+      // camera variables
+      iCameraX = 0 ;                               // camera x position init.
+      iCameraY = 0 ;                               // camera y position init.
+      iCameraW = PlayerCamera.get_CameraWidth() ;  // camera width (const)
+      iCameraH = PlayerCamera.get_CameraHeight();  // camera height (const)
 
       Src.x = 0;			//Source set for x and y
       Src.y = 0;
@@ -60,13 +73,17 @@ void Screen_Graphics::StartSDL(int iScreenWidth, int iScreenHeight){
 /****************** Control the functionalities of SDL (Graphics) *************/
 
 // combines and manages all Graphic functions
-void Screen_Graphics::GraphicsControl(World_Vectors vecWorldVector, int iWorldSize, int iScreenWidth){
+void Screen_Graphics::GraphicsControl(World_Vectors vecWorldVector, int iWorldSize,
+   int iScreenHeight, int iScreenWidth, int iCameraEdgeState){
 
    // Load Textures
    LoadTextures();
 
+   // move Camera depending on iCameraEdgeState (see documentation depending variable)
+   PlayerCamera.move_Camera(iCameraEdgeState);
+
    // draws the World Surface of the chosen Vector
-   DrawWorldSurface(vecWorldVector, iWorldSize, iScreenWidth);
+   DrawWorldSurface(vecWorldVector, iWorldSize, iScreenHeight ,iScreenWidth, iCameraEdgeState);
 
    // update window (a function by SDL)
    SDL_UpdateWindowSurface(_ptrWindow);
@@ -76,9 +93,10 @@ void Screen_Graphics::GraphicsControl(World_Vectors vecWorldVector, int iWorldSi
 /****************** Draw the Graphics on Screen *******************************/
 
 // Draws the surface out of Worldvector from Loaded Textures from LoadTextures
-void Screen_Graphics::DrawWorldSurface(World_Vectors vecWorldVector, int iWorldSize, int iScreenWidth){
+void Screen_Graphics::DrawWorldSurface(World_Vectors vecWorldVector, int iWorldSize,
+   int iScreenHeight, int iScreenWidth, int iCameraEdgeState){
 
-   // basic variables to realize drawing
+   // basic variables to realize drawing (here later texture class)
    int iObjectSize = 100;   // size of Object to be drawn in X direction
    //int iObjectSizeY = 100;  // size of Object to be drawn in Y direction
 
@@ -88,6 +106,18 @@ void Screen_Graphics::DrawWorldSurface(World_Vectors vecWorldVector, int iWorldS
    int h = 0;           // running index for going through the number of numbers in row
 
    int iNumberTiles = vecWorldVector.get_vecWorldVectorSize(); // actual number of Fields in WorldVector
+
+   // functions and variable set depending on camera positon:
+   int iCameraX = PlayerCamera.get_CameraPositionX();
+   int iCameraY = PlayerCamera.get_CameraPositionY();
+
+   // set i,j,h depending on camera position (first row to draw; i changes j,h later)
+   /*do{
+      i = iCameraY;  // first row to draw (i determines which row from World_Vector will be read)
+      j = i+1;
+      h =
+   }*/
+
 
    //Dest.x = ((iScreenWidth/2) - (iObjectSize/2));   // set Dest.x for placement of first tile
 
