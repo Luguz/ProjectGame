@@ -19,26 +19,29 @@ class Screen_Camera{
    int iBottomBorder;   // defines border of bottom Screen (is not 0)
    int iRightBorder;    // defines border of rigth Screen (is not 0)
 
-   int iVelocityX;      // defines the Velocity of the camera by X
-   int iVelocityY;      // defines the Velocity of the camera by Y
+   int iVelocity;       // defines the Velocity of the camera
 
    SDL_Rect camera;     // the actual camera (X,Y,Width,Height)
+
+   signed int iCameraZoomFactor; // Zoom faktor (default "No-Zoom" = 1)
 
 public:
    // Standard-Constructor
    Screen_Camera();
 
-   // constructor (Camera defined by Size and Velocity)
-   Screen_Camera(int iCameraSizeX , int iCameraSizeY, int iCameraVelocityX,
-      int iCameraVelocityY, int iScreenWidth, int iScreenHeight);
+   // constructor (Camera defined by Screen_size and World_Parameter)
+   Screen_Camera(int , int , int , int );
 
    // get the postion of the camera
+   int get_CameraVelocity();   // Velocity
    int get_CameraPositionX();  // X
    int get_CameraPositionY();  // Y
    int get_CameraWidth();      // Width
    int get_CameraHeight();     // Height
+   int get_CameraZoom();       // Zoom-Factor
+
    // camera movement
-   void move_Camera(int);
+   void move_Camera(int, int);   // move camera
 
 
 };

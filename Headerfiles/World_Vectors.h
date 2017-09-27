@@ -11,6 +11,7 @@
 
 #include <string>
 #include <vector>
+#include <cmath>           // rounding function
 
 class World_Vectors{
 /************ Structure to contain world informations *************************/

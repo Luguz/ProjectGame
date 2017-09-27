@@ -15,24 +15,32 @@ Main_Game::Main_Game(): _clGameState(clGameState::PLAY){  // Gamestate = PLAY
 /*                           Graphic-Parameter                                */
 
    // Resolution Settings
-   iSelectedScreenWidth =  1600;       // Screen width
-   iSelectedScreenHeigth = 900 ;       // Screen height
+   iSelectedScreenWidth =  1000;       // Screen width
+   iSelectedScreenHeigth = 1000;       // Screen height
+   iTileSize = 50;
    // Camera variables: Edge State (on start 0), mouse in middle of screen
    iCameraEdgeState = 0;               // no scrolling on start
+   iCameraZoom = 0;                    // standard zoom faktor adjusted
    iMousePosX = iSelectedScreenWidth;  // set x on start (just to init.)
    iMousePosY = iSelectedScreenHeigth; // set y on start (just to init.)
    iEdgeSize  = 15;                    // area from screen edges in which you scroll
 
-/*                           Basic-Game-functionalities                       */
+   // Field selection
+   iSelectPosX = 0;
+   iSelectPosY = 0;
+/*                            Game-variables                                  */
+   // Size of the World Home Base
+   iPlayerWorldSize = 5;              // must be unequal
 
+
+/*                           Basic-Game-functionalities                       */
    // allow SDL functions (Graphics) via BaseSDL in Main_Game
-   BaseSDL = Screen_Graphics(iSelectedScreenWidth, iSelectedScreenHeigth);
+   BaseSDL = Screen_Graphics(iSelectedScreenWidth, iSelectedScreenHeigth, iPlayerWorldSize, iTileSize);
    // allow SDL functions (Audio) via AudioSDL in Main_Game
    AudioSDL = Audio_Playback();
 
-/*                            Game-variables                                  */
-   // Size of the World Home Base
-   iPlayerWorldSize = 100;            // must be a tens potency
+   // creates world surface for starting World
+   PlayerHomeBase = World_Vectors(iPlayerWorldSize);
 
 }
 
@@ -71,14 +79,11 @@ void Main_Game::_GameLoop(){
 
 void Main_Game::_InitSystems(){
 
-   // creates world surface for starting World
-   PlayerHomeBase = World_Vectors(iPlayerWorldSize);
-
    // creates the Window
    BaseSDL.StartSDL(iSelectedScreenWidth,iSelectedScreenHeigth);
 
    // starts Audio functions
-   //AudioSDL.StartAudio();
+   AudioSDL.StartAudio();
 
 }
 
@@ -101,7 +106,7 @@ SDL_Event evnt;      // variable for events ( 1 = pending; 2 = none available)
 
          // take mousemotion (for now for the camera scrolling)
          // for information depending iCameraEdgeState see documentation
-         case SDL_MOUSEMOTION:
+         /* case SDL_MOUSEMOTION:
             int x,y;
             SDL_GetMouseState(&x,&y);
             iMousePosX = x;
@@ -135,11 +140,57 @@ SDL_Event evnt;      // variable for events ( 1 = pending; 2 = none available)
             // left
             if(iMousePosY < iSelectedScreenHeigth-iEdgeSize && iMousePosY > iEdgeSize && iMousePosX <= iEdgeSize){ iCameraEdgeState = 8;}
 
+            //printf("x:%i y:%i\n",x,y );
          // end of SDL_MOUSEMOTION
             break;
-         case SDLK_ESCAPE:
-            _clGameState = clGameState::EXIT;
-            SDL_Quit();
+
+
+         // zoom with camera
+         case SDL_MouseWheel:
+            // scroll up
+            if(SDL_MouseWheel.y == 1){
+               iCameraZoom += 1;
+            }
+            // scroll down
+            if(SDL_MouseWheel.y == -1){
+               iCameraZoom -= 1;
+            }
+         // end of zoom with camera
+            break;
+*/
+         case SDL_KEYDOWN:
+            switch(evnt.key.keysym.sym){
+               case SDLK_UP:
+               printf("UP\n");
+               if(iSelectPosY >= 0){
+                  iSelectPosY -= iTileSize;
+               }
+               break;
+            case SDLK_DOWN:
+               printf("DOWN\n");
+               if(iSelectPosY <= iSelectedScreenHeigth){
+                  iSelectPosY += iTileSize;
+               }
+               break;
+            case SDLK_LEFT:
+               printf("LEFT\n");
+               if(iSelectPosX >= 0){
+                  iSelectPosX -= iTileSize;
+               }
+               break;
+            case SDLK_RIGHT:
+               printf("RIGHT\n");
+               if(iSelectPosX <= iSelectedScreenWidth){
+                  iSelectPosX += iTileSize;
+               }
+               break;
+            case SDLK_ESCAPE:
+               _clGameState = clGameState::EXIT;
+               SDL_Quit();
+            default:
+               break;
+            }
+            break;
          default:
             break;
        }
@@ -153,5 +204,5 @@ SDL_Event evnt;      // variable for events ( 1 = pending; 2 = none available)
 void Main_Game::_DrawGame(){
    // starts all functions for creating the graphics
    BaseSDL.GraphicsControl(PlayerHomeBase, iPlayerWorldSize, iSelectedScreenHeigth
-      ,iSelectedScreenWidth, iCameraEdgeState);
+      ,iSelectedScreenWidth, iCameraEdgeState, iCameraZoom, iSelectPosX, iSelectPosY);
 }

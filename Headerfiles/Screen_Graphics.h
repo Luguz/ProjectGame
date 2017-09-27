@@ -13,6 +13,8 @@
 #include <SDL2/SDL_image.h>   // for Loading Images
 #include <stdio.h>
 #include <string>
+#include <math.h>             // used for round() functions
+#include <vector>
 
 #include "World_Vectors.h"    // info about the WorldVector and Size
 #include "Screen_Camera.h"    // info about what to render (what the player see)
@@ -29,18 +31,21 @@ class Screen_Graphics{
 /************ Variables to draw Window ****************************************/
 
    // get the info about the player camera
-   Screen_Camera PlayerCamera;
-   int iCameraX ;                              // holds x postion of camera
+   //Screen_Camera PlayerCamera;
+   /*int iCameraX ;                              // holds x postion of camera
    int iCameraY ;                              // holds y postion of camera
    int iCameraW ;                              // holds Width  of camera
    int iCameraH ;                              // holds Height of camera
-
-   // destination of Image from Source
-   SDL_Rect Src;		// Destination of Source of Image
+   int iCameraZ ;                              // holds the zoom faktor (the actual one not just the value to init change)
+   */
+   // Source info variables (Destination, Size)
+   SDL_Rect Src;		   // Destination of Source of Image
+   int iTileSize;       // size of Tiles (smallest unit on Map) (same in X and Y)
+   int iTile;           // place in world vector
 
    // Destination of the Image on Screen
-   SDL_Rect Dest;		// Destination of Image on Screen
-
+   SDL_Rect Dest;		                       // Destination of Image on Screen
+   int iWorldSize;                          // Size of World defines the begin and end of World
 
 /************ Functions to manage Graphics ************************************/
 
@@ -48,10 +53,11 @@ class Screen_Graphics{
    void LoadTextures();
 
    // draw the World on Screen out of vecWorldVector
-   void DrawWorldSurface(World_Vectors, int, int, int, int);
+   void DrawWorldSurface(World_Vectors, int, int);
 
    // list of Textures needed to be loaded in Game
    SDL_Texture    *background;
+   SDL_Texture    *selectionField;
 
 
 
@@ -66,7 +72,7 @@ public:
    Screen_Graphics();
 
    // constructor
-   Screen_Graphics(int iScreenWidth, int iScreenHeight);
+   Screen_Graphics(int, int, int, int);
 
 /************ Screen_Graphic functions ****************************************/
 
@@ -74,7 +80,7 @@ public:
    void StartSDL(int, int);
 
    // manages graphic-functions(SDL) and changes
-   void GraphicsControl(World_Vectors, int, int, int, int);
+   void GraphicsControl(World_Vectors, int, int, int, int, int, int, int);
 
 };
 

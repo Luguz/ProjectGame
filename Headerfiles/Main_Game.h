@@ -28,7 +28,8 @@ class Main_Game{
    clGameState _clGameState;
 
 /*                             Base-Functionalities                           */
-
+   // the player world
+   World_Vectors PlayerHomeBase;          // main Player starting World
    // include graphic functionalities in Main_Game
    Screen_Graphics BaseSDL;
    // include audio functionalities in Main_Game
@@ -43,18 +44,22 @@ class Main_Game{
 
    // world creation of Player-Home-Base
    int iPlayerWorldSize;                  // size of the Player World
-   World_Vectors PlayerHomeBase;          // main Player starting World
 
 /*                            Graphic-Parameter                               */
 
    // Screen Resolution
    int iSelectedScreenWidth;        // Width
    int iSelectedScreenHeigth;       // Heigth
+   int iTileSize;                   // smallest unit on screen
    // Camera Variables
    int iCameraEdgeState;            // camera on/in edge/corner? -> see documentation for variable info
+   int iCameraZoom;                 // camera zoom in/out -> see screen_camera.cpp
    int iMousePosX;                  // position mouse in x
    int iMousePosY;                  // position mouse in y
    int iEdgeSize;                   // size of edge-area in which scrolling begins (for simpler use)
+   // Field selection
+   int iSelectPosX;
+   int iSelectPosY;
 
    // monitors the input (SDL_Event)
    void _InputCheck();
@@ -79,6 +84,7 @@ public:
 
    // starts the game -> Loop, init. Systems
    void RunGame();
+
 
 };
 

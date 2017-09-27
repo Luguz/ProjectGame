@@ -1,6 +1,12 @@
 Common fixes for Errors created by compiling program.
 
-   TRY MAKE CLEAN FIRST !
+
+   !!!!!!!!!!!!!!!!!!!!!!!!!!
+
+   !! TRY MAKE CLEAN FIRST !!
+
+   !!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
 MAC:
 -> Segmentation fault 11:
@@ -22,7 +28,7 @@ MAC:
    (-> unknown type Screen_Camera) (class-type)
    1. you included to many headers(-files)
    2. look when you included a class if there are 3 or more classes including each other -> not good ;)
-   
+
 LINUX:
 -> Speicherzugriffsfehler (Speicherabzug geschrieben)
    1. printf richtige Verlinkung (%i oder %s überprüfen)

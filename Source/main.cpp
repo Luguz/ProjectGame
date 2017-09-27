@@ -10,12 +10,12 @@
 //    main.cpp :: copyrights by Lukas Guz, Felix Korthals
 
 #include "Main_Game.h"
+#include <stdio.h>
 
 int main(int, char**) {
 
    // include Main_Game in main
    Main_Game MainGame;
-
 
    // load constructor
    MainGame = Main_Game();

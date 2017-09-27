@@ -25,7 +25,7 @@ copyrights by Lukas Guz, Felix Korthals
 - ul    == unsigned long
 - ll    == long long
 - ull   == unsigned long long
-- f     == float
+- fl     == float
 - d     == double
 - ld    == long double
 - str   == string
