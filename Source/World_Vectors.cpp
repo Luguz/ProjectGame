@@ -31,8 +31,6 @@ World_Vectors::World_Vectors(int iWorldSize){
 
 
 
-   float flMedian = ceil(iWorldSize/2);
-   int iMedian = (int)flMedian;
    // init vecWorldVector (fill with 0)
    int i = 0;
    do{
@@ -40,107 +38,48 @@ World_Vectors::World_Vectors(int iWorldSize){
       i++;
    }while(i != iWorldSize*iWorldSize);
 
-   vecWorldVector[iMedian] = 1;
 
-   int j = 2;                // row running index (starting in second line)
-   //printf("J:%i\n",j );
-   int a = 0;                // number of numbers left and right still to fill
+   int j = 1;               // row running index (starting in second line)
+   int iLeftStart;          // left limiting element every row
+   int iHalfWorldsize = (iWorldSize+1)/2;
+   int a;                   // number of elements to the right left to fill
 
-   int iL = 1;          // left side of median running index
-   int iR = 0;          // right side of median running index
+   // calculate the middle element of the first row
+   int iMedian = ceil(iWorldSize/2);
 
 
    // upper half (triangle) of the world
-   do{
-      // median is not middle
-      if (j % 2 == 0){
-         iMedian += iWorldSize;                // new median (next row)
-         //printf("iMedian:%i ;iR:%i\n",iMedian, iR );
-         vecWorldVector[iMedian] = 1;          // fill place in new median
+   while(j < iHalfWorldsize){
 
-         a = 0;                             // reset running index
-         do{
-            a++;
-            vecWorldVector[iMedian-a] = 1;     // fill left side from median
-         }while(a != iL);                        // end when no places to fill
+      iLeftStart = iMedian-( floor(j/2) );      // calculate left limit for the playable area
 
-         a = 0;                                 // reset running index
-         if(iR != 0){                           // when iR = 0 the loop would go to eternity
-            do{
-               //printf("a:%i iMew%i\n",a, iMedian);
-               a++;
-               vecWorldVector[iMedian+a] = 1;     // fill right side from median
-            }while(a != iR );                      // end when no places to fill
-         }
-         // next line will have more numbers left and right:
-         iL++;
-         iR++;
-
-      // else when median is in the middle
-      }else{
-         a = 0;
-         iMedian += iWorldSize;         // fill median place
-         vecWorldVector[iMedian] = 1;
-
-         do{
-            a++;
-            // fill vecWorldVector left and right
-            vecWorldVector[iMedian-a] = 1;
-            vecWorldVector[iMedian+a] = 1;
-         }while(a != (j-1)/2 );  // j is the row AND the number of numbers in the row but a = j/2 minus the middle element
+      a = 0;
+      while(a < j){                             // fill in ones from left to right
+        vecWorldVector[iLeftStart+a] = 1;       // from 'iLeftStart' to (iLeftStart + j)
+        a++;                                    // increment 'a' until it reaches 'j'
       }
 
-      j++;     // next row (and more numbers in the row)
-      //printf("J:%i\n",j );
-   }while(j != (iWorldSize+1)/2);         // ends when upper half plus next line is filled
+      iMedian += iWorldSize;      // increment median (for next row)
+      j++;                        // increment row running index
+   }
 
-   j--;
-   printf("J:%i\n",j );
-   //iL -= 1;
-   //iR -= 1;
    // bottom half (triangle) of the world
-   do{
+   while(j >= 1){
 
-      if (j % 2 == 0){
-         iMedian += iWorldSize;
-         vecWorldVector[iMedian] = 1;
+      iLeftStart = iMedian-( floor(j/2) );
 
-         a = 0;
-         do{
-            a++;
-            vecWorldVector[iMedian-a] = 1;
-            //a++;
-         }while(a != iL);
-         a = 0;
-         if(iR != 0){
-            do{
-               vecWorldVector[iMedian+a] = 1;
-               a++;
-            }while(a != iR );
-         }
-         // number of elements left and right decreases
-         iL--;
-         iR--;
-
-      }else{
-         a = 0;
-         iMedian += iWorldSize;
-         do{
-            vecWorldVector[iMedian-a] = 1;
-            vecWorldVector[iMedian+a] = 1;
-            a++;
-         }while(a != floor(j/2) );
-
+      a = 0;
+      while(a < j){
+        vecWorldVector[iLeftStart+a] = 1;
+        a++;
       }
 
-      j--;                    // bottom half the number of elements decrease
-      //printf("J:%i\n",j );
+      iMedian += iWorldSize;
+      j--;
+   }
 
-   }while(j != 1);            // ends when no line remains
 
-   //iMedian += iWorldSize;
-   vecWorldVector[iMedian] = 1;
-
+   // DEBUG grafics
    int f = 0;
    do{
       if(f % iWorldSize == 0 && f != 0){
@@ -150,6 +89,7 @@ World_Vectors::World_Vectors(int iWorldSize){
       f++;
    }while(f <= iWorldSize*iWorldSize-1);
    printf("\n \n");
+
 }
 
 
