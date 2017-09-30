@@ -79,9 +79,14 @@ World_Vectors::World_Vectors(int iWorldSize){
    }
 
 
-  // DEBUG grafics
+  // Debug grafics
 /*int f = 0;
   do{
+
+   // DEBUG grafics
+   int f = 0;
+   do{
+
       if(f % iWorldSize == 0 && f != 0){
          printf("\n");
       };
@@ -89,7 +94,9 @@ World_Vectors::World_Vectors(int iWorldSize){
       f++;
    }while(f <= iWorldSize*iWorldSize-1);
    printf("\n \n");
+
 */
+
 }
 
 
