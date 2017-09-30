@@ -46,10 +46,9 @@ public:
    int  get_vecWorldVectorTile(int iPosOnWorld);
    // function to get the number of the Tiles of World_Vector
    int get_vecWorldVectorSize();
+   // function to set data of spezific place in World_Vectors
+   void set_vecWorldVectorTile(int, int);
 };
 
-class World_Vectors_Tile{
-
-};
 
 #endif //end of define(__GameProject__World_Vectors__)

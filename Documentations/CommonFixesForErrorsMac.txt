@@ -5,6 +5,8 @@ Common fixes for Errors created by compiling program.
 
    !! TRY MAKE CLEAN FIRST !!
 
+   !! Standart-Constructor OR TYPE OF VARIABLE IN FUNCTION!!
+
    !!!!!!!!!!!!!!!!!!!!!!!!!!
 
 

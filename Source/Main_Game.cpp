@@ -14,10 +14,18 @@
 Main_Game::Main_Game(): _clGameState(clGameState::PLAY){  // Gamestate = PLAY
 /*                           Graphic-Parameter                                */
 
-   // Resolution Settings
-   iSelectedScreenWidth =  1000;       // Screen width
-   iSelectedScreenHeigth = 1000;       // Screen height
+   // Size of the World Home Base
+   iPlayerWorldSize = 33;              // must be unequal
    iTileSize = 50;
+
+   // timer varaibels
+   StartTime = clock();
+
+   // Resolution Settings
+   iSelectedScreenWidth = 1700; //iTileSize*iPlayerWorldSize+iTileSize/2;       // Screen width
+   iSelectedScreenHeigth = 1000; //iTileSize*((iPlayerWorldSize+1)/2);       // Screen height
+   //printf("w:%i h:%i\n", iSelectedScreenWidth, iSelectedScreenHeigth);
+
    // Camera variables: Edge State (on start 0), mouse in middle of screen
    iCameraEdgeState = 0;               // no scrolling on start
    iCameraZoom = 0;                    // standard zoom faktor adjusted
@@ -25,12 +33,28 @@ Main_Game::Main_Game(): _clGameState(clGameState::PLAY){  // Gamestate = PLAY
    iMousePosY = iSelectedScreenHeigth; // set y on start (just to init.)
    iEdgeSize  = 15;                    // area from screen edges in which you scroll
 
-   // Field selection
-   iSelectPosX = 0;
-   iSelectPosY = 0;
+   // player position in World_Vectors
+   iPlayerPos = 0;
+
+   // creates world surface for starting World
+   PlayerHomeBase = World_Vectors(iPlayerWorldSize);
+
 /*                            Game-variables                                  */
-   // Size of the World Home Base
-   iPlayerWorldSize = 5;              // must be unequal
+  // Buildings
+  LivingQuarters  = Buildings(102, 100, 1, 10, 0, 25);
+  Factory         = Buildings(101, 200, 1, 10, 10);
+  Street          = Buildings(100, 20, 1, 1);
+
+  // Player
+  //iCountFactory = 0;    //number of owned factories
+  //iCountLivQuart = 0;   //number of owned livingguarters
+
+  iBalance = 1000;     // your money
+  iTitanium = 100;    // your Titanium
+  iPopulation = 100;  // Population
+
+  iProfit = 0;      // gettin money ohhh oh .... hopefully
+
 
 
 /*                           Basic-Game-functionalities                       */
@@ -39,8 +63,9 @@ Main_Game::Main_Game(): _clGameState(clGameState::PLAY){  // Gamestate = PLAY
    // allow SDL functions (Audio) via AudioSDL in Main_Game
    AudioSDL = Audio_Playback();
 
-   // creates world surface for starting World
-   PlayerHomeBase = World_Vectors(iPlayerWorldSize);
+
+
+
 
 }
 
@@ -55,6 +80,7 @@ void Main_Game::RunGame(){
    _GameLoop();
 }
 
+
 /************ Loop of the whole Game ******************************************/
 
 // this loop is used by other functions to close the game
@@ -63,6 +89,18 @@ void Main_Game::RunGame(){
 void Main_Game::_GameLoop(){
    // functions that checks the Gamestate -> Loop
    while(_clGameState != clGameState::EXIT){
+
+     //printf("StartTime%i clock: %i\n", StartTime, (unsigned long) clock() );
+     PassedTime = ((unsigned long) clock() - StartTime ) / CLOCKS_PER_SEC;   // don't play at midnight or bad things may happen
+      if(PassedTime >= 2){
+        set_NewBalance();
+       if(iBalance <= 0){
+         _clGameState = clGameState::EXIT;
+       }
+       PassedTime = 0;
+       StartTime = clock();
+     }
+
       // input check
       _InputCheck();
       // draw the game
@@ -94,6 +132,7 @@ void Main_Game::_InitSystems(){
 void Main_Game::_InputCheck(){
 SDL_Event evnt;      // variable for events ( 1 = pending; 2 = none available)
 
+
    // process inputs
    while (SDL_PollEvent(&evnt)) // while event true (=1)
    {
@@ -104,95 +143,108 @@ SDL_Event evnt;      // variable for events ( 1 = pending; 2 = none available)
             _clGameState = clGameState::EXIT;
             break;
 
-         // take mousemotion (for now for the camera scrolling)
-         // for information depending iCameraEdgeState see documentation
-         /* case SDL_MOUSEMOTION:
-            int x,y;
-            SDL_GetMouseState(&x,&y);
-            iMousePosX = x;
-            iMousePosY = y;
-
-
-            // mouse is on no screen edge (reset of iCameraEdgeState):
-            if (iMousePosX > 0 && iMousePosX < iSelectedScreenWidth && iMousePosY > 0 && iMousePosY < iSelectedScreenHeigth){
-               iCameraEdgeState = 0;
-            }
-
-            // all 8 edge/edgecorner combinations: (edge size set bit higher)
-
-            // top left
-            if(iMousePosY <= iEdgeSize && iMousePosX <= iEdgeSize) { iCameraEdgeState = 1;}
-            // top
-            if(iMousePosY == 0 && iMousePosX > iEdgeSize && iMousePosX < iSelectedScreenWidth-iEdgeSize ){ iCameraEdgeState = 2;}
-            //top right
-            if(iMousePosY <= iEdgeSize && iMousePosX >= iSelectedScreenWidth-iEdgeSize ){ iCameraEdgeState = 3;}
-
-            // rigth
-            if(iMousePosY > iEdgeSize && iMousePosY < iSelectedScreenHeigth-iEdgeSize && iMousePosX >= iSelectedScreenWidth-iEdgeSize ){ iCameraEdgeState = 4;}
-
-            // bottom rigth
-            if(iMousePosY >= iSelectedScreenHeigth-iEdgeSize && iMousePosX >= iSelectedScreenWidth-iEdgeSize ){ iCameraEdgeState = 5;}
-            // bottom
-            if(iMousePosY >= iSelectedScreenHeigth-iEdgeSize && iMousePosX < iSelectedScreenWidth-iEdgeSize && iMousePosX > iEdgeSize){ iCameraEdgeState = 6;}
-            // bottom left
-            if(iMousePosY >= iSelectedScreenHeigth-iEdgeSize && iMousePosX <= iEdgeSize){ iCameraEdgeState = 7;}
-
-            // left
-            if(iMousePosY < iSelectedScreenHeigth-iEdgeSize && iMousePosY > iEdgeSize && iMousePosX <= iEdgeSize){ iCameraEdgeState = 8;}
-
-            //printf("x:%i y:%i\n",x,y );
-         // end of SDL_MOUSEMOTION
-            break;
-
-
-         // zoom with camera
-         case SDL_MouseWheel:
-            // scroll up
-            if(SDL_MouseWheel.y == 1){
-               iCameraZoom += 1;
-            }
-            // scroll down
-            if(SDL_MouseWheel.y == -1){
-               iCameraZoom -= 1;
-            }
-         // end of zoom with camera
-            break;
-*/
          case SDL_KEYDOWN:
             switch(evnt.key.keysym.sym){
-               case SDLK_UP:
-               printf("UP\n");
-               if(iSelectPosY >= 0){
-                  iSelectPosY -= iTileSize;
-               }
-               break;
-            case SDLK_DOWN:
-               printf("DOWN\n");
-               if(iSelectPosY <= iSelectedScreenHeigth){
-                  iSelectPosY += iTileSize;
-               }
-               break;
-            case SDLK_LEFT:
-               printf("LEFT\n");
-               if(iSelectPosX >= 0){
-                  iSelectPosX -= iTileSize;
-               }
-               break;
-            case SDLK_RIGHT:
-               printf("RIGHT\n");
-               if(iSelectPosX <= iSelectedScreenWidth){
-                  iSelectPosX += iTileSize;
-               }
-               break;
-            case SDLK_ESCAPE:
-               _clGameState = clGameState::EXIT;
-               SDL_Quit();
-            default:
-               break;
+
+              // Movement
+              case SDLK_UP:
+                 //printf("UP to %i, Row:%i\n",iPlayerPos,(iPlayerPos/iPlayerWorldSize));
+                 if(iPlayerPos > 0){
+                    if((iPlayerPos/iPlayerWorldSize) % 2 == 0){
+                      iPlayerPos  -= iPlayerWorldSize;
+                    }else{
+                      iPlayerPos  -= iPlayerWorldSize-1;
+                    }
+                 }else{
+                   iPlayerPos = 0;
+                 }
+                 break;
+              case SDLK_DOWN:
+                 //printf("DOWN to %i, Row:%i\n",iPlayerPos,(iPlayerPos/iPlayerWorldSize));
+                 if(iPlayerPos < iPlayerWorldSize*iPlayerWorldSize-1){
+                    if((iPlayerPos/iPlayerWorldSize) % 2 == 0){
+                      iPlayerPos  += iPlayerWorldSize-1;
+                    }else{
+                      iPlayerPos  += iPlayerWorldSize;
+                    }
+                  }else{
+                    iPlayerPos = iPlayerWorldSize*iPlayerWorldSize-1;
+                  }
+                 break;
+              case SDLK_LEFT:
+                 //printf("LEFT to %i, Row:%i\n",iPlayerPos,(iPlayerPos/iPlayerWorldSize));
+                 if(iPlayerPos > 0){
+                    iPlayerPos--;
+                 }else{
+                   iPlayerPos = 0;
+                 }
+                 break;
+              case SDLK_RIGHT:
+                 //printf("RIGHT to %i, Row:%i\n",iPlayerPos,(iPlayerPos/iPlayerWorldSize));
+                 if(iPlayerPos < iPlayerWorldSize*iPlayerWorldSize-1){
+                    iPlayerPos++;
+                  }else{
+                    iPlayerPos = iPlayerWorldSize*iPlayerWorldSize-1;
+                  }
+                 break;
+
+              //        Reset_Check_Variables(); Building
+              case SDLK_0:
+                 printf("Abriss\n");
+                 if(PlayerHomeBase.get_vecWorldVectorTile(iPlayerPos) > 0
+                    && (get_iBalance() - 50 >= 0 )){
+                   PlayerHomeBase.set_vecWorldVectorTile(iPlayerPos, 1);
+                   iBalance -= 50;
+                  }else{
+                    printf("nix zum abreissen: %i\n",PlayerHomeBase.get_vecWorldVectorTile(iPlayerPos));
+                  }
+                 break;
+              case SDLK_1:      // Street
+                 printf("Street build\n");
+                 if(PlayerHomeBase.get_vecWorldVectorTile(iPlayerPos) == 1
+                    && (get_iBalance() - Street.get_BuildCost()) >= 0 ){
+                   PlayerHomeBase.set_vecWorldVectorTile(iPlayerPos, 100);
+                   set_BuildBalance(Street);
+                  }else{
+                    printf("ist bereits bebaut: %i ,oder du hast nicht genug Geld!\n",PlayerHomeBase.get_vecWorldVectorTile(iPlayerPos));
+                  }
+                  break;
+              case SDLK_2:        // factory
+                  printf("Factory\n");
+                  if(PlayerHomeBase.get_vecWorldVectorTile(iPlayerPos) == 1
+                    && (get_iBalance() - Factory.get_BuildCost()) >= 0 ){
+                    PlayerHomeBase.set_vecWorldVectorTile(iPlayerPos, 101);
+                    set_BuildBalance(Factory);
+                  }else{
+                    printf("ist bereits bebaut: %i ,oder du hast nicht genug Geld!\n",PlayerHomeBase.get_vecWorldVectorTile(iPlayerPos));
+                  }
+                 break;
+              case SDLK_3:        // LivingQuarters
+                  printf("Living Quarters build\n");
+                  if(PlayerHomeBase.get_vecWorldVectorTile(iPlayerPos) == 1
+                    && (get_iBalance() - LivingQuarters.get_BuildCost()) >= 0 ){
+                    PlayerHomeBase.set_vecWorldVectorTile(iPlayerPos, 102);
+                    set_BuildBalance(LivingQuarters);
+                  }else{
+                    printf("ist bereits bebaut: %i ,oder du hast nicht genug Geld!\n",PlayerHomeBase.get_vecWorldVectorTile(iPlayerPos));
+                  }
+                  break;
+
+
+
+
+
+                 // End Game
+              case SDLK_ESCAPE:
+                 _clGameState = clGameState::EXIT;
+                 SDL_Quit();
+              default:
+                 break;
             }
             break;
          default:
             break;
+
        }
    }
 }
@@ -204,5 +256,38 @@ SDL_Event evnt;      // variable for events ( 1 = pending; 2 = none available)
 void Main_Game::_DrawGame(){
    // starts all functions for creating the graphics
    BaseSDL.GraphicsControl(PlayerHomeBase, iPlayerWorldSize, iSelectedScreenHeigth
-      ,iSelectedScreenWidth, iCameraEdgeState, iCameraZoom, iSelectPosX, iSelectPosY);
+      ,iSelectedScreenWidth, iCameraEdgeState, iCameraZoom, iPlayerPos, iBalance);
+}
+
+
+/************ Player Variables Calculations ***********************************/
+
+
+void Main_Game::set_BuildBalance(Buildings Construction){
+  iBalance -= Construction.get_BuildCost();
+}
+
+int Main_Game::set_NewBalance(){
+  // reset
+  iCountFactory = 0;
+  iCountLivQuart = 0;
+
+  int iTile = 0;
+  while(iTile <= iPlayerWorldSize*iPlayerWorldSize-1){
+      switch(PlayerHomeBase.get_vecWorldVectorTile(iTile)){
+        case 101: iCountFactory++; break;             // count factories
+        case 102: iCountLivQuart++; break;            // count living Quarters
+      }
+      iTile++;
+  }
+  // calculate your new balance
+  iProfit = 0;
+  iProfit += iCountFactory*Factory.get_Income() -
+              iCountLivQuart*LivingQuarters.get_BuildMaintainCost();
+  iBalance += iProfit;
+  return iBalance;
+}
+
+int Main_Game::get_iBalance(){
+  return iBalance;
 }

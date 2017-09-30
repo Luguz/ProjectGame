@@ -11,10 +11,12 @@
 
 #include <SDL2/SDL.h>         // basic SDL functions
 #include <SDL2/SDL_image.h>   // for Loading Images
+#include <SDL2/SDL_ttf.h>     // for text (requires sdl2_ttf)
 #include <stdio.h>
 #include <string>
 #include <math.h>             // used for round() functions
 #include <vector>
+#include <sstream>            // for string streams
 
 #include "World_Vectors.h"    // info about the WorldVector and Size
 #include "Screen_Camera.h"    // info about what to render (what the player see)
@@ -40,12 +42,16 @@ class Screen_Graphics{
    */
    // Source info variables (Destination, Size)
    SDL_Rect Src;		   // Destination of Source of Image
+   SDL_Rect SrcBack;
    int iTileSize;       // size of Tiles (smallest unit on Map) (same in X and Y)
    int iTile;           // place in world vector
 
    // Destination of the Image on Screen
    SDL_Rect Dest;		                       // Destination of Image on Screen
+   SDL_Rect DestBack;
    int iWorldSize;                          // Size of World defines the begin and end of World
+
+   std::stringstream strText;
 
 /************ Functions to manage Graphics ************************************/
 
@@ -57,9 +63,19 @@ class Screen_Graphics{
 
    // list of Textures needed to be loaded in Game
    SDL_Texture    *background;
+   SDL_Texture    *spacebackground;
    SDL_Texture    *selectionField;
+   SDL_Texture    *factory;
+   SDL_Texture    *streets;
+   SDL_Texture    *livingquarters;
 
+   SDL_Texture    *balance_text;
+   SDL_Texture    *balance_value;
 
+   //loading font
+   TTF_Font *font;
+   SDL_Color font_color;
+   SDL_Rect Dest_Text;
 
 
 

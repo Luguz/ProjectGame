@@ -11,12 +11,14 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <time.h>              // time
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
 #include "Screen_Graphics.h"
 #include "Audio_Playback.h"
 #include "World_Vectors.h"
+#include "Buildings.h"                // Buildings cpp
 
 enum class clGameState{START, PLAY, EXIT, PAUSE};  // class that contains diff. gamestates
 
@@ -37,6 +39,23 @@ class Main_Game{
    // include file management functionalities in Main_Game
    File_Manager FileStream;
 
+/*                             Buildings                                      */
+
+  Buildings LivingQuarters;
+  Buildings Factory;
+  Buildings Street;
+
+/*                             Player_Variables                               */
+  int iBalance;     // your money
+  int iTitanium;    // your Titanium
+  int iPopulation;  // Population
+
+  int iProfit;      // gettin money ohhh oh .... hopefully
+
+  // counter variables for number of buildings build
+  int iCountFactory;
+  int iCountLivQuart;
+
 
 /*************************** Main_Game functions ******************************/
 
@@ -44,6 +63,19 @@ class Main_Game{
 
    // world creation of Player-Home-Base
    int iPlayerWorldSize;                  // size of the Player World
+   unsigned long StartTime;               // start time for frame calc. profit calc.
+   unsigned long PassedTime;              // time passed since start time
+
+   // controls the belongings of the player
+
+   void set_BuildBalance(Buildings);
+
+   // calculate your new balance by frames/time
+   int set_NewBalance();
+
+   bool Check_EnoughMoney();
+
+   int get_iBalance();
 
 /*                            Graphic-Parameter                               */
 
@@ -57,9 +89,9 @@ class Main_Game{
    int iMousePosX;                  // position mouse in x
    int iMousePosY;                  // position mouse in y
    int iEdgeSize;                   // size of edge-area in which scrolling begins (for simpler use)
-   // Field selection
-   int iSelectPosX;
-   int iSelectPosY;
+
+   // position of player in World_Vectors
+   int iPlayerPos;
 
    // monitors the input (SDL_Event)
    void _InputCheck();
@@ -84,6 +116,7 @@ public:
 
    // starts the game -> Loop, init. Systems
    void RunGame();
+
 
 
 };
