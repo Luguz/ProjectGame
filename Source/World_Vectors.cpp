@@ -82,11 +82,6 @@ World_Vectors::World_Vectors(int iWorldSize){
   // Debug grafics
 /*int f = 0;
   do{
-
-   // DEBUG grafics
-   int f = 0;
-   do{
-
       if(f % iWorldSize == 0 && f != 0){
          printf("\n");
       };
